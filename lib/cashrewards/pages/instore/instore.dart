@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_app/cashrewards/data/instore_offers_data.dart';
-import 'package:flutter_app/cashrewards/pages/common/carousel.dart';
 import 'package:flutter_app/cashrewards/pages/common/merchant_card.dart';
 import 'package:flutter_app/cashrewards/pages/common/merchant_list_item.dart';
-import 'package:flutter_app/cashrewards/pages/layout/footer.dart';
 
 class Instore extends StatelessWidget {
   static const routeName = '/instore';
@@ -45,16 +43,21 @@ class Instore extends StatelessWidget {
               ),
             ),
             ListView(
-              children: INSTORE_MERCHANT
-                  .map((data) => MerchantListItem(
-                        data.id,
-                        data.name,
-                        data.backgroundImageUrl,
-                        data.logoImageUrl,
-                        data.commissionString,
-                        data.cardLinkedSpecialTerms,
-                      ))
-                  .toList(),
+              children: <Widget>[
+                Container(height: 300, child: Text('map')),
+                Column(
+                  children: INSTORE_MERCHANT
+                      .map((data) => MerchantListItem(
+                            data.id,
+                            data.name,
+                            data.backgroundImageUrl,
+                            data.logoImageUrl,
+                            data.commissionString,
+                            data.cardLinkedSpecialTerms,
+                          ))
+                      .toList(),
+                )
+              ],
             ),
           ],
         ),
