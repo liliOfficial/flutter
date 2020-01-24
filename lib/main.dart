@@ -7,6 +7,7 @@ import 'package:flutter_app/cashrewards/pages/shop/shop.dart';
 
 import 'cashrewards/pages/layout/footer.dart';
 import 'cashrewards/pages/merchant/merchant_page.dart';
+import 'cashrewards/pages/screens/refer_a_friend.dart';
 
 // import './execise/index.dart';
 // import './one_page/index.dart';
@@ -72,10 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
   static final _widgetOptions = <Widget>[
     ShopPage(),
     Instore(),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
+    ReferAFriend(),
     Text(
       'Index 2: School',
       style: optionStyle,
