@@ -3,12 +3,15 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/cashrewards/pages/instore/instore.dart';
+import 'package:flutter_app/cashrewards/pages/screens/help_center.dart';
+import 'package:flutter_app/cashrewards/pages/screens/web_view.dart';
 import 'package:flutter_app/cashrewards/pages/shop/shop.dart';
 
-import 'cashrewards/pages/layout/footer.dart';
 import 'cashrewards/pages/merchant/merchant_page.dart';
-import 'cashrewards/pages/screens/more_page.dart';
+import 'cashrewards/pages/more/more_page.dart';
+import 'cashrewards/pages/screens/how_it_works.dart';
 import 'cashrewards/pages/screens/refer_a_friend.dart';
+import 'cashrewards/pages/user/user_page.dart';
 
 // import './execise/index.dart';
 // import './one_page/index.dart';
@@ -56,6 +59,10 @@ class MyApp extends StatelessWidget {
         MerchantPage.routeName: (ctx) => MerchantPage(),
         '/shop': (ctx) => ShopPage(),
         Instore.routeName: (ctx) => Instore(),
+        HowItWorks.routeName: (ctx) => HowItWorks(),
+        HelpCenter.routeName: (ctx) => HelpCenter(),
+        WebViewScreen.routeName:(ctx) => WebViewScreen(),
+        UserPage.routeName:(ctx) => UserPage(),
       },
     );
   }
