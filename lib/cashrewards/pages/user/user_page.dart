@@ -1,36 +1,54 @@
 import 'package:flutter/material.dart';
 
+import 'user_info.dart';
+import 'user_transaction.dart';
+
 class UserPage extends StatelessWidget {
   static const routeName = '/user';
+
+  final background = Transform.scale(
+    scale: 10,
+    child: Container(
+      width: double.infinity,
+      height: 81,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: LinearGradient(
+          begin: Alignment(1, 0),
+          end: Alignment.bottomRight,
+          colors: <Color>[
+            Color(0xFF3023AE),
+            Color(0xFF8700D7),
+          ],
+        ),
+      ),
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: 120,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.elliptical(500, 30),
-            bottomRight: Radius.elliptical(500, 30),
-          ),
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: <Color>[
-              Color(0xFF3023AE),
-              Color(0xFF8700D7),
+      body: ListView(
+        children: [
+          Column(
+            children: <Widget>[
+              Stack(
+                children: <Widget>[
+                  background,
+                  UserInfo(),
+                ],
+              ),
+              UserTransaction(),
             ],
           ),
-        ),
-        child: Center(
-          child: Text(
-            'user name',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 22,
-            ),
-          ),
-        ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).primaryColor,
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Icon(Icons.arrow_back),
       ),
     );
   }

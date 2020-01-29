@@ -20,6 +20,9 @@ class ShopPage extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(10),
                 child: TextField(
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/search');
+                  },
                   scrollPadding: EdgeInsets.all(2),
                   decoration: InputDecoration(
                     contentPadding:
@@ -28,7 +31,6 @@ class ShopPage extends StatelessWidget {
                       borderSide: BorderSide(color: Colors.teal),
                       gapPadding: 0,
                     ),
-
                     prefixIcon: const Icon(
                       Icons.search,
                     ),
@@ -37,12 +39,12 @@ class ShopPage extends StatelessWidget {
                 ),
               ),
               Carousel(),
-              Categories('What are you looking for?',CATEGORIES),
+              Categories('What are you looking for?', CATEGORIES),
               CardScroll('Featured offers', INSTORE_MERCHANT),
               CardScroll('Increased cashback offers', INSTORE_MERCHANT),
-              PopularStore('Popular stores',INSTORE_MERCHANT),
+              PopularStore('Popular stores', INSTORE_MERCHANT),
               CardScroll('In-store', INSTORE_MERCHANT),
-              CardGrid(data:INSTORE_MERCHANT, title:'Trending store'),              
+              CardGrid(data: INSTORE_MERCHANT, title: 'Trending store'),
             ],
           ),
         ),
