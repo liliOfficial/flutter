@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/cashrewards/data/search.dart';
+import 'package:flutter_app/cashrewards/pages/common/go_back_button.dart';
+
+import 'search_card.dart';
+import 'search_input.dart';
 
 class SearchPage extends StatelessWidget {
   static const routeName = '/search';
@@ -8,23 +13,28 @@ class SearchPage extends StatelessWidget {
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.all(10),
-          child: TextField(
-            autofocus: true,
-            scrollPadding: EdgeInsets.all(2),
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
-              border: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.teal),
-                gapPadding: 0,
+          child: Stack(
+            children: <Widget>[
+              ListView(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(
+                      top: 55,
+                      bottom: 30,
+                    ),
+                    child: Column(
+                      children:
+                          SEARCHRESULT.map((data) => SearchCard(data)).toList(),
+                    ),
+                  ),
+                ],
               ),
-              prefixIcon: const Icon(
-                Icons.search,
-              ),
-              labelText: 'Search stores and offers',
-            ),
+              SearchInput(),
+            ],
           ),
         ),
       ),
+      floatingActionButton: GoBackButton(),
     );
   }
 }

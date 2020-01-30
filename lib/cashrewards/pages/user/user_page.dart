@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/cashrewards/pages/common/go_back_button.dart';
 
 import 'user_info.dart';
 import 'user_transaction.dart';
@@ -43,13 +44,7 @@ class UserPage extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).primaryColor,
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        child: Icon(Icons.arrow_back),
-      ),
+      floatingActionButton: GoBackButton(),
     );
   }
 }

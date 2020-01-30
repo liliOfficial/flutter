@@ -11,6 +11,7 @@ import 'cashrewards/pages/merchant/merchant_page.dart';
 import 'cashrewards/pages/more/more_page.dart';
 import 'cashrewards/pages/screens/how_it_works.dart';
 import 'cashrewards/pages/screens/refer_a_friend.dart';
+import 'cashrewards/pages/search/search_page.dart';
 import 'cashrewards/pages/user/user_page.dart';
 
 // import './execise/index.dart';
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
         HelpCenter.routeName: (ctx) => HelpCenter(),
         WebViewScreen.routeName:(ctx) => WebViewScreen(),
         UserPage.routeName:(ctx) => UserPage(),
+        SearchPage.routeName:(ctx) => SearchPage(),
       },
     );
   }

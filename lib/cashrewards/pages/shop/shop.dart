@@ -17,24 +17,27 @@ class ShopPage extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Header(),
-              Container(
-                padding: EdgeInsets.all(10),
-                child: TextField(
-                  onTap: () {
-                    Navigator.of(context).pushNamed('/search');
-                  },
-                  scrollPadding: EdgeInsets.all(2),
-                  decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 15, vertical: 0),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.teal),
-                      gapPadding: 0,
+              InkWell(
+                onTap: () {
+                      Navigator.of(context).pushNamed('/search');
+                    },
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  child: TextField(                   
+                    enabled: false,
+                    scrollPadding: EdgeInsets.all(2),
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.teal),
+                        gapPadding: 0,
+                      ),
+                      prefixIcon: const Icon(
+                        Icons.search,
+                      ),
+                      labelText: 'Search stores and offers',
                     ),
-                    prefixIcon: const Icon(
-                      Icons.search,
-                    ),
-                    labelText: 'Search stores and offers',
                   ),
                 ),
               ),
