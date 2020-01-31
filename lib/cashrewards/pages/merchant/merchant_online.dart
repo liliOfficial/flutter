@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
-import 'merchant_notification.dart';
 import 'merchant_offer.dart';
+import 'widgets/merchant_banner.dart';
+import 'widgets/merchant_hiw_button.dart';
+import 'widgets/merchant_notification.dart';
+import 'widgets/merchant_tips.dart';
 
 class MerchantOnline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: <Widget>[
-        Image.network(
-          'https://cdn.cashrewards.com/category-image/chat-thai-standard-cashback.jpg',
-        ),
+        MerchantBanner(),
         Container(
-          padding: EdgeInsets.only(top: 10, left: 5, right: 5, bottom: 20),
+          padding: EdgeInsets.only(top: 20, left: 5, right: 5, bottom: 30),
           child: Column(
             children: <Widget>[
               Container(
                 padding: EdgeInsets.only(
-                  top: 5,
                   bottom: 5,
                 ),
                 child: Text(
@@ -49,36 +49,9 @@ class MerchantOnline extends StatelessWidget {
                   onPressed: () {},
                 ),
               ),
-              Container(
-                child: OutlineButton(
-                  padding: const EdgeInsets.all(0.0),
-                  child: Container(
-                    width: 200,
-                    padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      'How It Works',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ),
-                  onPressed: () {},
-                ),
-              ),
+              MerchantHIWButton(),
+              MerchantTip(),
               MerchantOffer(),
-              Container(
-                padding: EdgeInsets.only(
-                  top: 8,
-                  bottom: 8,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Text('Terms'),
-                    Text('Cashback rates'),
-                    Text('Cashback tips'),
-                  ],
-                ),
-              ),
               MerchantNotification(),
             ],
           ),

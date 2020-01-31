@@ -21,7 +21,7 @@ class MoreList extends StatelessWidget {
     {
       'icon': FontAwesomeIcons.creditCard,
       'text': 'Linked Cards',
-      'url': '/howitworks',
+      'url': '/cardlist',
     },
     {
       'icon': FontAwesomeIcons.info,
