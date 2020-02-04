@@ -1,43 +1,97 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/shared/circle_icon_button.dart';
 
 class CardListCard extends StatelessWidget {
+  final cardData;
+
+  CardListCard(this.cardData);
+
   @override
   Widget build(BuildContext context) {
+    final Color textColor = Colors.grey[600];
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 5),
       child: Card(
         child: Container(
           width: double.infinity,
           padding: EdgeInsets.all(15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
             children: <Widget>[
-              Text(
-                'Card number',
-                style: TextStyle(color: Colors.grey[600]),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Card number',
+                    style: TextStyle(color: textColor),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(
+                      top: 8,
+                      bottom: 8,
+                    ),
+                    child: Text(
+                      '**** **** **** ' + cardData['cardLastFour'],
+                      style: TextStyle(fontSize: 25, color: textColor),
+                    ),
+                  ),
+                  Text(
+                    'Date added',
+                    style: TextStyle(color: textColor),
+                  ),
+                  Text(
+                    'Nov 28, 2019',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16,
+                      color: textColor,
+                    ),
+                  ),
+                ],
               ),
-              Container(
-                padding: EdgeInsets.only(
-                  top: 8,
-                  bottom: 15,
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.only(top: 5),
+                  height: 96,
+                  // color: Colors.grey[100],
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Container(
+                        child: InkWell(
+                          onTap: () {},
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              Text(
+                                'Remove ',
+                                style:
+                                    TextStyle(color: textColor, fontSize: 16),
+                              ),
+                              Icon(
+                                Icons.delete,
+                                color: textColor,
+                                size: 18,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        child: cardData['type'] == 'VISA'
+                            ? Image.asset(
+                                'assets/images/visa.png',
+                                height: 26,
+                              )
+                            : Image.asset(
+                                'assets/images/mastercard.png',
+                                height: 40,
+                              ),
+                      ),
+                    ],
+                  ),
                 ),
-                child: Text(
-                  '**** **** **** 8888',
-                  style: TextStyle(fontSize: 25, color: Colors.grey[600]),
-                ),
-              ),
-              Text(
-                'Date added',
-                style: TextStyle(color: Colors.grey[600]),
-              ),
-              Text(
-                'Nov 28, 2019',
-                style: TextStyle(
-                  fontWeight: FontWeight.w300,
-                  fontSize: 16,
-                  color: Colors.grey[600],
-                ),
-              ),
+              )
             ],
           ),
         ),

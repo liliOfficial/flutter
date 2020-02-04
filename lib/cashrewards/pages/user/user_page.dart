@@ -11,7 +11,7 @@ class UserPage extends StatelessWidget {
     scale: 10,
     child: Container(
       width: double.infinity,
-      height: 81,
+      height: 82,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         gradient: LinearGradient(

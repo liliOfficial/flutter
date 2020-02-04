@@ -1,54 +1,73 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/cashrewards/pages/common/go_back_button.dart';
+import 'package:flutter_app/cashrewards/pages/linkcard/cardlist/card_background.dart';
+import 'package:flutter_app/shared/circle_word_button.dart';
 
 import 'card_list_card.dart';
 
 class CardList extends StatelessWidget {
   static const routeName = '/cardlist';
 
-  final background = Transform.scale(
-    scale: 80,
-    child: Container(
-      width: double.infinity,
-      height: 8,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: LinearGradient(
-          begin: Alignment(1, 0),
-          end: Alignment.bottomRight,
-          colors: <Color>[
-            Color(0xFF3023AE),
-            Color(0xFF8700D7),
-          ],
-        ),
-      ),
-    ),
-  );
+  static const cardList = [
+    {
+      "addedDate": "2018-10-11T05:25:45.000Z",
+      "cardId": "V254",
+      "cardLastFour": "9835",
+      "status": "Active",
+      "type": "VISA"
+    },
+    {
+      "addedDate": "2018-10-11T05:25:45.000Z",
+      "cardId": "V259",
+      "cardLastFour": "8888",
+      "status": "Active",
+      "type": "VISA"
+    },
+    {
+      "addedDate": "2018-10-11T05:25:45.000Z",
+      "cardId": "M259",
+      "cardLastFour": "1234",
+      "status": "Active",
+      "type": "MASTER"
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       child: Scaffold(
-        body: ListView(
+        body: Stack(
           children: <Widget>[
-            Stack(
+            CardBackground(),
+            ListView(
               children: <Widget>[
-                background,
                 Align(
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.symmetric(vertical: 20),
-                        child: Text(
-                          'Linked Cards',
-                          style: TextStyle(color: Colors.white, fontSize: 26),
+                  child: SafeArea(
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: 30),
+                          child: Text(
+                            'Linked Cards',
+                            style: TextStyle(color: Colors.white, fontSize: 26),
+                          ),
                         ),
-                      ),
-                      Column(
-                        children: [0, 1, 2]
-                            .map((data) => CardListCard())
-                            .toList(),
-                      )
-                    ],
+                        Column(
+                          children: cardList
+                              .map((data) => CardListCard(data))
+                              .toList(),
+                        ),
+                        CircleWordButton(
+                          width: 110,
+                          height: 110,
+                          icon: Icons.add,
+                          text: 'Link a card',
+                          onTap: () {
+                            Navigator.of(context).pushNamed('/cardadd');
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

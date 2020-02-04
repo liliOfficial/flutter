@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/shared/circle_word_button.dart';
 
 class UserInfo extends StatelessWidget {
   @override
@@ -23,7 +24,7 @@ class UserInfo extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.only(top: 30,bottom: 3),
+            padding: EdgeInsets.only(top: 30, bottom: 3),
             child: Text(
               'Rewards Balance',
               style: TextStyle(
@@ -61,50 +62,12 @@ class UserInfo extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromRGBO(0, 0, 0, 0.25),
-                  blurRadius: 8, // has the effect of softening the shadow
-                  spreadRadius: 4, // has the effect of extending the shadow
-                  offset: Offset(4, 4),
-                ),
-              ],
-              borderRadius: BorderRadius.circular(100),
-            ),
-            margin: EdgeInsets.all(15),
-            child: SizedBox.fromSize(
-              size: Size(85, 85), // button width and height
-              child: ClipOval(
-                child: Material(
-                  color: Theme.of(context).accentColor, // button color
-                  child: InkWell(
-                    splashColor: Colors.white, // splash color
-                    onTap: () {}, // button pressed
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.attach_money,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(bottom: 5),
-                          child: Text(
-                            "Get Paid",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
+          CircleWordButton(
+            width: 90,
+            height: 90,
+            icon: Icons.attach_money,
+            text: 'Get paid',
+            onTap: () {},
           ),
           Text(
             'Lifetime Rewards',
