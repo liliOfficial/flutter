@@ -8,6 +8,7 @@ import 'package:flutter_app/cashrewards/pages/screens/web_view.dart';
 import 'package:flutter_app/cashrewards/pages/shop/shop.dart';
 
 import 'cashrewards/pages/linkcard/cardlist/card_add.dart';
+import 'cashrewards/pages/linkcard/cardlist/card_add_info.dart';
 import 'cashrewards/pages/linkcard/cardlist/card_list.dart';
 import 'cashrewards/pages/merchant/merchant_page.dart';
 import 'cashrewards/pages/more/more_page.dart';
@@ -69,6 +70,7 @@ class MyApp extends StatelessWidget {
         SearchPage.routeName:(ctx) => SearchPage(),
         CardList.routeName:(ctx) => CardList(),
         CardAdd.routeName:(ctx) => CardAdd(),
+        CardAddInfo.routeName:(ctx) => CardAddInfo(),
       },
     );
   }

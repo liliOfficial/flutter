@@ -24,6 +24,7 @@ dependencies:
   carousel_slider: ^1.4.1
   font_awesome_flutter: ^8.5.0
   webview_flutter: ^0.3.19+5
+  # flutter_card_io: ^0.0.3
   google_maps_flutter: ^0.5.21+16
   flutter_html: ^0.11.1
 

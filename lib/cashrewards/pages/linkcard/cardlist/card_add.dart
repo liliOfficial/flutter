@@ -11,8 +11,8 @@ class CardAdd extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cardType = [
-      {'logo': 'assets/images/visa.png'},
-      {'logo': 'assets/images/mastercard.png'},
+      {'logo': 'assets/images/visa.png', 'type': 'Visa'},
+      {'logo': 'assets/images/mastercard.png', 'type': 'Mastercard'},
     ];
     final size = [
       MediaQuery.of(context).size.width,
@@ -32,7 +32,7 @@ class CardAdd extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.symmetric(vertical: 30),
                           child: Text(
-                            'Linked Cards',
+                            'Link New Card',
                             style: TextStyle(color: Colors.white, fontSize: 26),
                           ),
                         ),
@@ -49,7 +49,7 @@ class CardAdd extends StatelessWidget {
                                 .map(
                                   (data) => Container(
                                     padding: EdgeInsets.all(size * 0.08),
-                                    margin: EdgeInsets.all(size * 0.02),
+                                    margin: EdgeInsets.all(size * 0.03),
                                     width: size * 0.38,
                                     height: size * 0.38,
                                     decoration: BoxDecoration(
@@ -60,8 +60,10 @@ class CardAdd extends StatelessWidget {
                                                 Theme.of(context).dividerColor,
                                             width: 1)),
                                     child: InkWell(
-                                      onTap: (){
-                                        Navigator.of(context).pushNamed('/user');
+                                      onTap: () {
+                                        Navigator.of(context).pushNamed(
+                                            '/cardaddInfo',
+                                            arguments: {'type': data['type']});
                                       },
                                       child: Image.asset(
                                         data['logo'],
