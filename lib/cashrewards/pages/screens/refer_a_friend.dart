@@ -30,9 +30,7 @@ class _ReferAFriendState extends State<ReferAFriend> {
           ),
           if (_isLoadingPage)
             Center(
-              child: Image.network(
-                'https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif',
-              ),
+              child: CircularProgressIndicator(),
             ),
         ],
       ),

@@ -1,16 +1,47 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:flutter_card_io/flutter_card_io.dart';
 
 class CardAddForm extends StatefulWidget {
-  static const checkboxText =
-      'By clicking ‘Opt-in’ I agree to the Terms and Privacy Policy, and that Cashrewards may share my Mastercard card number linked to my Cashrewards account with Mastercard so that Mastercard can review my transactions and tell Cashrewards about my qualifying purchases and provide rewards. View our ';
-
   @override
   _CardAddFormState createState() => _CardAddFormState();
 }
 
 class _CardAddFormState extends State<CardAddForm> {
   bool _checkboxValue = false;
+  // Map<String, dynamic> _data = {};
+
+  // void _scanCard() async {
+  //   Map<String, dynamic> details;
+  //   // Platform messages may fail, so we use a try/catch PlatformException.
+  //   try {
+  //     details = await FlutterCardIo.scanCard({
+  //       "requireExpiry": true,
+  //       "scanExpiry": true,
+  //       "requireCVV": true,
+  //       "requirePostalCode": true,
+  //       "restrictPostalCodeToNumericOnly": true,
+  //       "requireCardHolderName": true,
+  //       "scanInstructions": "Hola! Fit the card within the box",
+  //     });
+  //   } on PlatformException {
+  //     print("Failed");
+  //     return;
+  //   }
+
+  //   if (details == null) {
+  //     print("Canceled");
+  //     return;
+  //   }
+
+  //   if (!mounted) return;
+
+  //   setState(() {
+  //     _data = details;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +51,10 @@ class _CardAddFormState extends State<CardAddForm> {
     final logoImg = routeArgs['type'] == 'Visa'
         ? 'assets/images/visa.png'
         : 'assets/images/mastercard.png';
+
+    final checkboxText = routeArgs['type'] == 'Visa'
+        ? 'By clicking ‘Opt-in’ I agree to the Terms and Privacy Policy, and that Cashrewards may share my Visa card number linked to my Cashrewards account with Visa so that Visa can review my transactions and tell Cashrewards about my qualifying purchases and provide rewards. View our '
+        : 'By clicking ‘Opt-in’ I agree to the Terms and Privacy Policy, and that Cashrewards may share my Mastercard card number linked to my Cashrewards account with Mastercard so that Mastercard can review my transactions and tell Cashrewards about my qualifying purchases and provide rewards. View our ';
 
     return Column(
       children: <Widget>[
@@ -58,6 +93,43 @@ class _CardAddFormState extends State<CardAddForm> {
           ],
         ),
         Container(
+          child: Text(
+            'OR',
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.grey[600],
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 20),
+          width: double.infinity,
+          child: OutlineButton(
+            padding: EdgeInsets.symmetric(vertical: 15),
+            borderSide: BorderSide(color: Colors.grey, width: 2),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.only(right: 10),
+                  child: Icon(
+                    FontAwesomeIcons.camera,
+                    color: Colors.grey[600],
+                  ),
+                ),
+                Text(
+                  "Scan",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.grey[600],
+                  ),
+                ),
+              ],
+            ),
+            onPressed: () {},
+          ),
+        ),
+        Container(
           padding: EdgeInsets.symmetric(vertical: 25),
           child: Row(
             children: <Widget>[
@@ -73,7 +145,7 @@ class _CardAddFormState extends State<CardAddForm> {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: CardAddForm.checkboxText,
+                        text: checkboxText,
                         style: TextStyle(color: Colors.grey[600]),
                       ),
                       TextSpan(

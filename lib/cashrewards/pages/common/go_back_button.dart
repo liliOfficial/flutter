@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class GoBackButton extends StatelessWidget {
+  final backgroundColor;
+  GoBackButton({this.backgroundColor});
+
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: backgroundColor??Theme.of(context).primaryColor,
       onPressed: () {
         Navigator.pop(context);
       },

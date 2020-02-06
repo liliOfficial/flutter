@@ -48,7 +48,7 @@ class CardAddInfo extends StatelessWidget {
           )
         ],
       ),
-      floatingActionButton: GoBackButton(),
+      floatingActionButton: GoBackButton(backgroundColor: Theme.of(context).accentColor),
     );
   }
 }

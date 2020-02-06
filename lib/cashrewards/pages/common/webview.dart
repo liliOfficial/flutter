@@ -53,10 +53,7 @@ class _WebviewPageState extends State<WebviewPage> {
           ),
           if (_isLoadingPage)
             Center(
-              child: Image.network(
-                'https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif',
-                width: 160,
-              ),
+              child: CircularProgressIndicator(),
             ),
         ],
       ),

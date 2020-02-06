@@ -15,7 +15,8 @@ class CardBackground extends StatelessWidget {
             end: Alignment.bottomRight,
             colors: <Color>[
               Color(0xFF3023AE),
-              Color(0xFF8700D7),
+              Color(0xFFC86DD7),
+              
             ],
           ),
         ),
