@@ -7,6 +7,7 @@ import 'package:flutter_app/cashrewards/pages/screens/help_center.dart';
 import 'package:flutter_app/cashrewards/pages/screens/web_view.dart';
 import 'package:flutter_app/cashrewards/pages/shop/shop.dart';
 
+import 'cashrewards/pages/auth/login.dart';
 import 'cashrewards/pages/linkcard/cardlist/card_add.dart';
 import 'cashrewards/pages/linkcard/cardlist/card_add_info.dart';
 import 'cashrewards/pages/linkcard/cardlist/card_list.dart';
@@ -65,12 +66,22 @@ class MyApp extends StatelessWidget {
         Instore.routeName: (ctx) => Instore(),
         HowItWorks.routeName: (ctx) => HowItWorks(),
         HelpCenter.routeName: (ctx) => HelpCenter(),
-        WebViewScreen.routeName:(ctx) => WebViewScreen(),
-        UserPage.routeName:(ctx) => UserPage(),
-        SearchPage.routeName:(ctx) => SearchPage(),
-        CardList.routeName:(ctx) => CardList(),
-        CardAdd.routeName:(ctx) => CardAdd(),
-        CardAddInfo.routeName:(ctx) => CardAddInfo(),
+        WebViewScreen.routeName: (ctx) => WebViewScreen(),
+        UserPage.routeName: (ctx) => UserPage(),
+        SearchPage.routeName: (ctx) => SearchPage(),
+        CardList.routeName: (ctx) => CardList(),
+        CardAdd.routeName: (ctx) => CardAdd(),
+        CardAddInfo.routeName: (ctx) => CardAddInfo(),
+        Login.routeName: (ctx) => Login(),
+      },
+      // onGenerateRoute: (settings) {
+      //   print(settings.arguments);
+      //   if (settings.arguments) {
+      //     return MaterialPageRoute(builder: (ctx) => Login());
+      //   }
+      // },
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(builder: (ctx) => ShopPage());
       },
     );
   }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CircleIconButton extends StatelessWidget {
-  final wordColor;
-  final backgroundColor;
-  final icon;
+  final Color wordColor;
+  final Color backgroundColor;
+  final IconData icon;
   final Function onPressed;
 
   CircleIconButton(

@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/shared/color_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:flutter_card_io/flutter_card_io.dart';
 
@@ -185,21 +186,10 @@ class _CardAddFormState extends State<CardAddForm> {
             ],
           ),
         ),
-        RaisedButton(
-          color: Theme.of(context).accentColor,
+        ColorButton(
+          text: 'Link Card',
           onPressed: () {},
-          textColor: Colors.white,
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 12),
-            width: double.infinity,
-            child: Center(
-              child: Text(
-                'Link Card',
-                style: TextStyle(fontSize: 18),
-              ),
-            ),
-          ),
-        )
+        ),
       ],
     );
   }

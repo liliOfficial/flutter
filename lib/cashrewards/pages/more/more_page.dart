@@ -18,10 +18,7 @@ class MorePage extends StatelessWidget {
           ),
           MoreList(),
           Container(
-            padding: EdgeInsets.symmetric(
-              vertical: 20,
-              horizontal: 15
-            ),
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
             child: Column(children: [
               InkWell(
                 onTap: () {
@@ -47,9 +44,7 @@ class MorePage extends StatelessWidget {
                   });
                 },
                 child: Container(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 25
-                  ),
+                  padding: EdgeInsets.symmetric(vertical: 25),
                   child: Text(
                     'Privacy Policy',
                     style: TextStyle(
@@ -58,10 +53,13 @@ class MorePage extends StatelessWidget {
                   ),
                 ),
               ),
-              Text(
-                'Sign Out',
-                style: TextStyle(
-                  fontSize: 20,
+              InkWell(
+                onTap: () {Navigator.of(context).pushNamed('/login');},
+                child: Text(
+                  'Sign Out',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
                 ),
               ),
             ]),
