@@ -1,11 +1,32 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_app/cashrewards/data/instore_offers_data.dart';
+import 'package:flutter_app/cashrewards/models/merchant_card.dart';
 import 'package:flutter_app/cashrewards/pages/common/merchant_card.dart';
 import 'package:flutter_app/cashrewards/pages/common/merchant_list_item.dart';
 
-class Instore extends StatelessWidget {
+import 'instore_drawer.dart';
+
+class Instore extends StatefulWidget {
   static const routeName = '/instore';
+
+  @override
+  _InstoreState createState() => _InstoreState();
+}
+
+class _InstoreState extends State<Instore> {
+  List<MerchantCard> _availableData = INSTORE_MERCHANT;
+
+  void _setFilters(String location) {
+    setState(() {
+      _availableData = location == 'ALL'
+          ? INSTORE_MERCHANT
+          : INSTORE_MERCHANT.where((data) {
+              return data.location.contains(location);
+            }).toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -23,20 +44,37 @@ class Instore extends StatelessWidget {
           ),
           title: Text('In-store 0ffers'),
         ),
+        drawer: InstoreDrawer(_setFilters),
         body: TabBarView(
           children: [
-            GridView(
+            // GridView(
+            //   padding: EdgeInsets.all(5),
+            //   children: _availableData
+            //       .map((data) => CardItem(
+            //             data.id,
+            //             data.name,
+            //             data.backgroundImageUrl,
+            //             data.logoImageUrl,
+            //             data.commissionString,
+            //             data.cardLinkedSpecialTerms,
+            //           ))
+            //       .toList(),
+            //   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            //     maxCrossAxisExtent: 250,
+            //     childAspectRatio: 0.85,
+            //   ),
+            // ),
+            GridView.builder(
               padding: EdgeInsets.all(5),
-              children: INSTORE_MERCHANT
-                  .map((data) => CardItem(
-                        data.id,
-                        data.name,
-                        data.backgroundImageUrl,
-                        data.logoImageUrl,
-                        data.commissionString,
-                        data.cardLinkedSpecialTerms,
-                      ))
-                  .toList(),
+              itemCount: _availableData.length,
+              itemBuilder: (ctx, i) => CardItem(
+                _availableData[i].id,
+                _availableData[i].name,
+                _availableData[i].backgroundImageUrl,
+                _availableData[i].logoImageUrl,
+                _availableData[i].commissionString,
+                _availableData[i].cardLinkedSpecialTerms,
+              ),
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 250,
                 childAspectRatio: 0.85,
@@ -46,7 +84,7 @@ class Instore extends StatelessWidget {
               children: <Widget>[
                 Container(height: 300, child: Text('map')),
                 Column(
-                  children: INSTORE_MERCHANT
+                  children: _availableData
                       .map((data) => MerchantListItem(
                             data.id,
                             data.name,

@@ -6,10 +6,10 @@ class Login extends StatelessWidget {
   static const routeName = '/login';
 
   final background = Transform.scale(
-    scale: 12,
+    scale: 11,
     child: Container(
       width: double.infinity,
-      height: 85,
+      height: 120,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         gradient: LinearGradient(

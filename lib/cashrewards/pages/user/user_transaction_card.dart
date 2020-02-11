@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/cashrewards/models/transaction.dart';
 
 class UserTransactionCard extends StatelessWidget {
+  final Transaction transaction ;
+
+  UserTransactionCard(this.transaction);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -15,9 +20,9 @@ class UserTransactionCard extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Container(
-                      padding: EdgeInsets.only(right: 10),
+                      padding: EdgeInsets.only(right: 15),
                       child: Image.network(
-                        'https://cdn.cashrewards.com/ajisen-ramen.jpg',
+                        transaction.logoImage,
                         width: 90,
                         height: 70,
                       ),
@@ -26,7 +31,7 @@ class UserTransactionCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          'IKEA',
+                          transaction.merchantName,
                           style: TextStyle(fontSize: 20),
                         ),
                         Container(
@@ -34,16 +39,19 @@ class UserTransactionCard extends StatelessWidget {
                             top: 5,
                             bottom: 5,
                           ),
-                          child: Text('20 Jan 2020'),
+                          child: Text(transaction.date),
                         ),
-                        Text('Enquire >'),
+                        Text('Enquire >',
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor)),
                       ],
                     ),
                   ],
                 ),
                 Container(
-                    padding: EdgeInsets.only(top: 10),
-                    child: Text('Cashback approved!'))
+                  padding: EdgeInsets.only(top: 10),
+                  child: Text(transaction.estimated==''?'Cashback approved!':'Estimated approved: '+transaction.estimated),
+                )
               ],
             ),
             Container(
@@ -60,16 +68,18 @@ class UserTransactionCard extends StatelessWidget {
                     width: double.infinity,
                     padding: EdgeInsets.only(top: 2, bottom: 3),
                     margin: EdgeInsets.only(bottom: 3),
-                    color: Colors.green,
+                    color: transaction.status == 'Approved'
+                        ? Colors.green
+                        : Colors.orange,
                     child: Center(
                       child: Text(
-                        'Approved',
+                        transaction.status,
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
                   Text(
-                    '\$50.00',
+                    '\$ ' + transaction.cashback,
                     style: TextStyle(
                       fontSize: 20,
                       color: Theme.of(context).primaryColor,
@@ -92,7 +102,7 @@ class UserTransactionCard extends StatelessWidget {
                           style: TextStyle(fontSize: 15),
                         ),
                         Text(
-                          '245.55',
+                          transaction.amount,
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.bold),
                         ),

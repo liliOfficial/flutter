@@ -32,6 +32,7 @@ class PopularStore extends StatelessWidget {
                           Image.network(
                             data.logoImageUrl,
                             height: 30,
+                            width: 110,
                           ),
                           Container(
                             padding:

@@ -7,6 +7,7 @@ class MerchantCard {
   final String logoImageUrl;
   final String commissionString;
   final String cardLinkedSpecialTerms;
+  final List<String> location;
 
   const MerchantCard ({
     @required this.id,
@@ -15,5 +16,6 @@ class MerchantCard {
     @required this.logoImageUrl,
     @required this.commissionString,
     @required this.cardLinkedSpecialTerms,
+    @required this.location,
   });
 }

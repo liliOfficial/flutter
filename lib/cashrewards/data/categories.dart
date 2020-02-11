@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 const CATEGORIES = [
   {
     'name': 'Travel & Holidays',
-    'icon': FontAwesomeIcons.gamepad,
+    'icon': FontAwesomeIcons.luggageCart,
   },
   {
     'name': 'Alcohol & Liquor',

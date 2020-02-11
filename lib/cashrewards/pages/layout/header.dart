@@ -32,7 +32,7 @@ class Header extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                     size: 24,
                   ),
-                  Text(' \$888.88',
+                  Text(' \$8888.88',
                       style: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontSize: 15.5)),

@@ -1,15 +1,8 @@
+
+
 import '../models/merchant_card.dart';
 
-const INSTORE_MERCHANT = const [
-  MerchantCard(
-    id: 1004034,
-    name: 'Ajisen Ramen',
-    backgroundImageUrl:
-        'https://cdn.cashrewards.com/category-image/ajisen-ramen-standard-cashback.jpg',
-    logoImageUrl: 'https://cdn.cashrewards.com/ajisen-ramen.jpg',
-    commissionString: 'Up to 70.00% Cashback',
-    cardLinkedSpecialTerms: '',
-  ),
+const INSTORE_MERCHANT = const [ 
   MerchantCard(
     id: 1003984,
     name: 'G-Star RAW',
@@ -18,6 +11,7 @@ const INSTORE_MERCHANT = const [
     logoImageUrl: 'https://cdn.cashrewards.com/g-star-raw.jpg',
     commissionString: '6.00% Cashback',
     cardLinkedSpecialTerms: '',
+    location:['SA','VIC'],
   ),
   MerchantCard(
     id: 1003996,
@@ -27,6 +21,7 @@ const INSTORE_MERCHANT = const [
     logoImageUrl: 'https://cdn.cashrewards.com/ikea.jpg',
     commissionString: '\$5.00 Cashback',
     cardLinkedSpecialTerms: 'Minimum spend \$50',
+    location:['QLD','NSW'],
   ),
   MerchantCard(
     id: 1004034,
@@ -36,15 +31,47 @@ const INSTORE_MERCHANT = const [
     logoImageUrl: 'https://cdn.cashrewards.com/liquorland.jpg',
     commissionString: '6.00% Cashback',
     cardLinkedSpecialTerms: 'Minimum spend \$20',
+    location:['NSW','NT'],
   ),
   MerchantCard(
     id: 1004034,
-    name: 'Ajisen Ramen',
+    name: 'PappaRich',
     backgroundImageUrl:
-        'https://cdn.cashrewards.com/category-image/liquorland-standard-cashback.jpg',
-    logoImageUrl: 'https://cdn.cashrewards.com/ajisen-ramen.jpg',
+        'https://cdn.cashrewards.com/category-image/papparich-standard-cashback.jpg',
+    logoImageUrl: 'https://cdn.cashrewards.com/papparich.jpg',
     commissionString: '7.00% Cashback',
     cardLinkedSpecialTerms: '',
+    location:['SA','NSW'],
+  ),
+  MerchantCard(
+    id: 1004034,
+    name: 'Xiaolongkan Hotpot',
+    backgroundImageUrl:
+        'https://cdn.cashrewards.com/category-image/xiaolongkan-hotpot-standard-cashback.jpg',
+    logoImageUrl: 'https://cdn.cashrewards.com/xiaolongkan-hotpot.jpg',
+    commissionString: '7.00% Cashback',
+    cardLinkedSpecialTerms: '',
+    location:['NSW','VIC'],
+  ),
+  MerchantCard(
+    id: 1004034,
+    name: 'TerryWhite Chemmart',
+    backgroundImageUrl:
+        'https://cdn.cashrewards.com/category-image/terrywhite-chemmart-standard-cashback.jpg',
+    logoImageUrl: 'https://cdn.cashrewards.com/terrywhite-chemmart.jpg',
+    commissionString: '7.00% Cashback',
+    cardLinkedSpecialTerms: '',
+    location:['NSW','VIC'],
+  ),
+  MerchantCard(
+    id: 1004034,
+    name: 'MyHouse',
+    backgroundImageUrl:
+        'https://cdn.cashrewards.com/category-image/myhouse-standard-cashback.jpg',
+    logoImageUrl: 'https://cdn.cashrewards.com/myhouse.png',
+    commissionString: '7.00% Cashback',
+    cardLinkedSpecialTerms: '',
+    location:['NSW','VIC'],
   ),
   MerchantCard(
     id: 1004034,
@@ -52,25 +79,8 @@ const INSTORE_MERCHANT = const [
     backgroundImageUrl:
         'https://cdn.cashrewards.com/category-image/ajisen-ramen-standard-cashback.jpg',
     logoImageUrl: 'https://cdn.cashrewards.com/ajisen-ramen.jpg',
-    commissionString: '7.00% Cashback',
+    commissionString: 'Up to 70.00% Cashback',
     cardLinkedSpecialTerms: '',
-  ),
-  MerchantCard(
-    id: 1004034,
-    name: 'Ajisen Ramen',
-    backgroundImageUrl:
-        'https://cdn.cashrewards.com/category-image/ajisen-ramen-standard-cashback.jpg',
-    logoImageUrl: 'https://cdn.cashrewards.com/ajisen-ramen.jpg',
-    commissionString: '7.00% Cashback',
-    cardLinkedSpecialTerms: '',
-  ),
-  MerchantCard(
-    id: 1004034,
-    name: 'Ajisen Ramen',
-    backgroundImageUrl:
-        'https://cdn.cashrewards.com/category-image/ajisen-ramen-standard-cashback.jpg',
-    logoImageUrl: 'https://cdn.cashrewards.com/ajisen-ramen.jpg',
-    commissionString: '7.00% Cashback',
-    cardLinkedSpecialTerms: '',
+    location:['NSW','VIC'],
   ),
 ];

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/cashrewards/data/transactions.dart';
+import 'package:flutter_app/cashrewards/models/transaction.dart';
 
 import 'user_transaction_card.dart';
 
@@ -29,8 +31,20 @@ class UserTransaction extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(5),
                   child: Column(
-                    children: [0, 1, 2, 3, 4]
-                        .map((data) => UserTransactionCard())
+                    children: TRANSACTION
+                        .map(
+                          (data) => UserTransactionCard(
+                            Transaction(
+                              logoImage: data['logoImage'],
+                              merchantName: data['merchantName'],
+                              date: data['date'],
+                              status: data['status'],
+                              amount: data['amount'],
+                              cashback: data['cashback'],
+                              estimated: data['estimated'],
+                            ),
+                          ),
+                        )
                         .toList(),
                   ),
                 ),

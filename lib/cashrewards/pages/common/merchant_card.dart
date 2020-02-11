@@ -32,6 +32,8 @@ class CardItem extends StatelessWidget {
               borderRadius: new BorderRadius.circular(3),
               child: Image.network(
                 backgroundImageUrl,
+                height: 135,
+                fit: BoxFit.cover,
               ),
             ),
             Container(
@@ -40,9 +42,17 @@ class CardItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Image.network(
-                    logoImageUrl,
-                    height: 30,
+                  Container(
+                    width: 120,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Image.network(
+                          logoImageUrl,
+                          height: 30,
+                        ),
+                      ],
+                    ),
                   ),
                   Container(
                     padding: EdgeInsets.only(

@@ -7,6 +7,8 @@ class MerchantBanner extends StatelessWidget {
       child: Image.network(
         'https://cdn.cashrewards.com/category-image/chat-thai-standard-cashback.jpg',
         width: double.infinity,
+        height:235,
+        fit: BoxFit.cover,
       ),
     );
   }
