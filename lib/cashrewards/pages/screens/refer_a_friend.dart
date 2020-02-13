@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+
+import 'package:flutter_app/cashrewards/models/merchant_card.dart';
+import 'package:flutter_app/cashrewards/pages/common/merchant_card.dart';
+
+import 'package:flutter_app/cashrewards/providers/favorite.dart';
+import 'package:flutter_app/shared/circle_icon.dart';
+
+import 'package:provider/provider.dart';
 
 class ReferAFriend extends StatefulWidget {
   @override
@@ -7,31 +14,48 @@ class ReferAFriend extends StatefulWidget {
 }
 
 class _ReferAFriendState extends State<ReferAFriend> {
-  bool _isLoadingPage = true;
-
   @override
   Widget build(BuildContext context) {
+    final List<MerchantCard> _availableData =
+        Provider.of<Favorite>(context).favorites;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('Refer a friend'),
+        title: Text('My Favorite'),
       ),
       body: Stack(
         children: <Widget>[
-          WebView(
-            initialUrl:
-                'https://www.cashrewards.com.au/how-it-works?showheader=false',
-            javascriptMode: JavascriptMode.unrestricted,
-            onPageStarted: (start) {
-              setState(() {
-                _isLoadingPage = false;
-              });
-            },
-          ),
-          if (_isLoadingPage)
-            Center(
-              child: CircularProgressIndicator(),
+          GridView.builder(
+            padding: EdgeInsets.all(5),
+            itemCount: _availableData.length,
+            itemBuilder: (ctx, i) => Stack(
+              children: [
+                CardItem(
+                  _availableData[i].id,
+                  _availableData[i].name,
+                  _availableData[i].backgroundImageUrl,
+                  _availableData[i].logoImageUrl,
+                  _availableData[i].commissionString,
+                  _availableData[i].cardLinkedSpecialTerms,
+                ),
+                Positioned(
+                  right: 10,
+                  top: 120,
+                  child: CircleIcon(
+                    icon: Icons.delete,
+                    onTap: () {
+                      Provider.of<Favorite>(context, listen: false)
+                          .deleteFavorite(_availableData[i]);
+                    },
+                  ),
+                ),
+              ],
             ),
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 250,
+              childAspectRatio: 0.85,
+            ),
+          )
         ],
       ),
     );

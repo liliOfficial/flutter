@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/cashrewards/providers/favorite.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/cashrewards/pages/instore/instore.dart';
 import 'package:flutter_app/cashrewards/pages/screens/help_center.dart';
@@ -30,59 +32,63 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // primarySwatch: Colors.deepPurple,
-        primaryColor: Color.fromRGBO(135, 0, 215, 1),
-        accentColor: Color.fromRGBO(241, 124, 33, 1),
-        fontFamily: 'Montserrat',
-        textTheme: ThemeData.light().textTheme.copyWith(
-            body1: TextStyle(
-              color: Colors.grey[900],
-            ),
-            body2: TextStyle(
-              color: Colors.grey[900],
-            ),
-            title: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            )),
-        appBarTheme: AppBarTheme(
-          iconTheme: IconThemeData(color: Colors.grey[900]),
+    return MultiProvider(
+          child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          // primarySwatch: Colors.deepPurple,
+          primaryColor: Color.fromRGBO(135, 0, 215, 1),
+          accentColor: Color.fromRGBO(241, 124, 33, 1),
+          fontFamily: 'Montserrat',
           textTheme: ThemeData.light().textTheme.copyWith(
-                title: TextStyle(
-                  color: Colors.grey[900],
-                  fontFamily: 'Montserrat',
-                  fontSize: 24,
-                ),
+              body1: TextStyle(
+                color: Colors.grey[900],
               ),
+              body2: TextStyle(
+                color: Colors.grey[900],
+              ),
+              title: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              )),
+          appBarTheme: AppBarTheme(
+            iconTheme: IconThemeData(color: Colors.grey[900]),
+            textTheme: ThemeData.light().textTheme.copyWith(
+                  title: TextStyle(
+                    color: Colors.grey[900],
+                    fontFamily: 'Montserrat',
+                    fontSize: 24,
+                  ),
+                ),
+          ),
         ),
-      ),
-      home: MyHomePage(),
-      routes: {
-        MerchantPage.routeName: (ctx) => MerchantPage(),
-        '/shop': (ctx) => ShopPage(),
-        Instore.routeName: (ctx) => Instore(),
-        HowItWorks.routeName: (ctx) => HowItWorks(),
-        HelpCenter.routeName: (ctx) => HelpCenter(),
-        WebViewScreen.routeName: (ctx) => WebViewScreen(),
-        UserPage.routeName: (ctx) => UserPage(),
-        SearchPage.routeName: (ctx) => SearchPage(),
-        CardList.routeName: (ctx) => CardList(),
-        CardAdd.routeName: (ctx) => CardAdd(),
-        CardAddInfo.routeName: (ctx) => CardAddInfo(),
-        Login.routeName: (ctx) => Login(),
-      },
-      // onGenerateRoute: (settings) {
-      //   print(settings.arguments);
-      //   if (settings.arguments) {
-      //     return MaterialPageRoute(builder: (ctx) => Login());
-      //   }
-      // },
-      onUnknownRoute: (settings) {
-        return MaterialPageRoute(builder: (ctx) => ShopPage());
-      },
+        home: MyHomePage(),
+        routes: {
+          MerchantPage.routeName: (ctx) => MerchantPage(),
+          '/shop': (ctx) => ShopPage(),
+          Instore.routeName: (ctx) => Instore(),
+          HowItWorks.routeName: (ctx) => HowItWorks(),
+          HelpCenter.routeName: (ctx) => HelpCenter(),
+          WebViewScreen.routeName: (ctx) => WebViewScreen(),
+          UserPage.routeName: (ctx) => UserPage(),
+          SearchPage.routeName: (ctx) => SearchPage(),
+          CardList.routeName: (ctx) => CardList(),
+          CardAdd.routeName: (ctx) => CardAdd(),
+          CardAddInfo.routeName: (ctx) => CardAddInfo(),
+          Login.routeName: (ctx) => Login(),
+        },
+        // onGenerateRoute: (settings) {
+        //   print(settings.arguments);
+        //   if (settings.arguments) {
+        //     return MaterialPageRoute(builder: (ctx) => Login());
+        //   }
+        // },
+        onUnknownRoute: (settings) {
+          return MaterialPageRoute(builder: (ctx) => ShopPage());
+        },
+      ), providers: [
+        ChangeNotifierProvider(create: (_) => Favorite()),
+      ],
     );
   }
 }
@@ -126,8 +132,8 @@ class _MyHomePageState extends State<MyHomePage> {
             title: Text('In-store'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.people),
-            title: Text('Refer'),
+            icon: Icon(Icons.favorite),
+            title: Text('Favorite'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.more_horiz),

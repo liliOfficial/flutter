@@ -13,7 +13,7 @@ class CircleIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Ink(
       decoration: ShapeDecoration(
-        color: backgroundColor,
+        color: backgroundColor??Theme.of(context).accentColor,
         shape: CircleBorder(),
       ),
       child: IconButton(

@@ -33,6 +33,7 @@ class CardItem extends StatelessWidget {
               child: Image.network(
                 backgroundImageUrl,
                 height: 135,
+                width: double.infinity,
                 fit: BoxFit.cover,
               ),
             ),
