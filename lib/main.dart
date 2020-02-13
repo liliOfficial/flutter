@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-          child: MaterialApp(
+      child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
           // primarySwatch: Colors.deepPurple,
@@ -86,7 +86,8 @@ class MyApp extends StatelessWidget {
         onUnknownRoute: (settings) {
           return MaterialPageRoute(builder: (ctx) => ShopPage());
         },
-      ), providers: [
+      ),
+      providers: [
         ChangeNotifierProvider(create: (_) => Favorite()),
       ],
     );
@@ -132,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
             title: Text('In-store'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
+            icon: Icon(Icons.star),
             title: Text('Favorite'),
           ),
           BottomNavigationBarItem(

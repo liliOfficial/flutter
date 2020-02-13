@@ -8,6 +8,7 @@ class MerchantCard {
   final String commissionString;
   final String cardLinkedSpecialTerms;
   final List<String> location;
+  final bool isFavorite;
 
   const MerchantCard ({
     @required this.id,
@@ -17,5 +18,6 @@ class MerchantCard {
     @required this.commissionString,
     @required this.cardLinkedSpecialTerms,
     @required this.location,
+    @required this.isFavorite,
   });
 }

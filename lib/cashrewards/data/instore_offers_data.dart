@@ -1,8 +1,6 @@
-
-
 import '../models/merchant_card.dart';
 
-const INSTORE_MERCHANT = const [ 
+const INSTORE_MERCHANT = const [
   MerchantCard(
     id: 1003984,
     name: 'G-Star RAW',
@@ -11,7 +9,8 @@ const INSTORE_MERCHANT = const [
     logoImageUrl: 'https://cdn.cashrewards.com/g-star-raw.jpg',
     commissionString: '6.00% Cashback',
     cardLinkedSpecialTerms: '',
-    location:['SA','VIC'],
+    isFavorite: true,
+    location: ['SA', 'VIC'],
   ),
   MerchantCard(
     id: 1003996,
@@ -21,7 +20,8 @@ const INSTORE_MERCHANT = const [
     logoImageUrl: 'https://cdn.cashrewards.com/ikea.jpg',
     commissionString: '\$5.00 Cashback',
     cardLinkedSpecialTerms: 'Minimum spend \$50',
-    location:['QLD','NSW'],
+    isFavorite: true,
+    location: ['QLD', 'NSW'],
   ),
   MerchantCard(
     id: 1004034,
@@ -31,7 +31,8 @@ const INSTORE_MERCHANT = const [
     logoImageUrl: 'https://cdn.cashrewards.com/liquorland.jpg',
     commissionString: '6.00% Cashback',
     cardLinkedSpecialTerms: 'Minimum spend \$20',
-    location:['NSW','NT'],
+    isFavorite: false,
+    location: ['NSW', 'NT'],
   ),
   MerchantCard(
     id: 1004034,
@@ -41,7 +42,8 @@ const INSTORE_MERCHANT = const [
     logoImageUrl: 'https://cdn.cashrewards.com/papparich.jpg',
     commissionString: '7.00% Cashback',
     cardLinkedSpecialTerms: '',
-    location:['SA','NSW'],
+    isFavorite: false,
+    location: ['SA', 'NSW'],
   ),
   MerchantCard(
     id: 1004034,
@@ -51,7 +53,8 @@ const INSTORE_MERCHANT = const [
     logoImageUrl: 'https://cdn.cashrewards.com/xiaolongkan-hotpot.jpg',
     commissionString: '7.00% Cashback',
     cardLinkedSpecialTerms: '',
-    location:['NSW','VIC'],
+    isFavorite: false,
+    location: ['NSW', 'VIC'],
   ),
   MerchantCard(
     id: 1004034,
@@ -61,7 +64,8 @@ const INSTORE_MERCHANT = const [
     logoImageUrl: 'https://cdn.cashrewards.com/terrywhite-chemmart.jpg',
     commissionString: '7.00% Cashback',
     cardLinkedSpecialTerms: '',
-    location:['NSW','VIC'],
+    isFavorite: false,
+    location: ['NSW', 'VIC'],
   ),
   MerchantCard(
     id: 1004034,
@@ -71,7 +75,8 @@ const INSTORE_MERCHANT = const [
     logoImageUrl: 'https://cdn.cashrewards.com/myhouse.png',
     commissionString: '7.00% Cashback',
     cardLinkedSpecialTerms: '',
-    location:['NSW','VIC'],
+    isFavorite: false,
+    location: ['NSW', 'VIC'],
   ),
   MerchantCard(
     id: 1004034,
@@ -81,6 +86,7 @@ const INSTORE_MERCHANT = const [
     logoImageUrl: 'https://cdn.cashrewards.com/ajisen-ramen.jpg',
     commissionString: 'Up to 70.00% Cashback',
     cardLinkedSpecialTerms: '',
-    location:['NSW','VIC'],
+    isFavorite: false,
+    location: ['NSW', 'VIC'],
   ),
 ];

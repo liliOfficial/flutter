@@ -12,6 +12,7 @@ class Favorite with ChangeNotifier {
       logoImageUrl: 'https://cdn.cashrewards.com/g-star-raw.jpg',
       commissionString: '6.00% Cashback',
       cardLinkedSpecialTerms: '',
+      isFavorite: true,
       location: ['SA', 'VIC'],
     ),
     MerchantCard(
@@ -22,6 +23,7 @@ class Favorite with ChangeNotifier {
       logoImageUrl: 'https://cdn.cashrewards.com/ikea.jpg',
       commissionString: '\$5.00 Cashback',
       cardLinkedSpecialTerms: 'Minimum spend \$50',
+      isFavorite: true,
       location: ['QLD', 'NSW'],
     )
   ];
@@ -32,8 +34,8 @@ class Favorite with ChangeNotifier {
     notifyListeners();
   }
 
-  void addFavorite() {
-    // _favorites.add(value);
+  void addFavorite(item) {
+    favorites.add(item);
     notifyListeners();
   }
 }
