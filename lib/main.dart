@@ -1,7 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/cashrewards/providers/favorite.dart';
+
+import 'package:flutter_app/cashrewards/providers/instore.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/cashrewards/pages/instore/instore.dart';
@@ -88,7 +89,7 @@ class MyApp extends StatelessWidget {
         },
       ),
       providers: [
-        ChangeNotifierProvider(create: (_) => Favorite()),
+        ChangeNotifierProvider(create: (_) => InstoreProvider()),
       ],
     );
   }

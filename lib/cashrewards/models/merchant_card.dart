@@ -8,9 +8,9 @@ class MerchantCard {
   final String commissionString;
   final String cardLinkedSpecialTerms;
   final List<String> location;
-  final bool isFavorite;
+  bool isFavorite;
 
-  const MerchantCard ({
+  MerchantCard ({
     @required this.id,
     @required this.name,
     @required this.backgroundImageUrl,

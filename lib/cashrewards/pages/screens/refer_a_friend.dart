@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/cashrewards/models/merchant_card.dart';
 import 'package:flutter_app/cashrewards/pages/common/merchant_card.dart';
 
-import 'package:flutter_app/cashrewards/providers/favorite.dart';
+import 'package:flutter_app/cashrewards/providers/instore.dart';
 import 'package:flutter_app/shared/circle_icon.dart';
 
 import 'package:provider/provider.dart';
@@ -17,7 +17,9 @@ class _ReferAFriendState extends State<ReferAFriend> {
   @override
   Widget build(BuildContext context) {
     final List<MerchantCard> _availableData =
-        Provider.of<Favorite>(context).favorites;
+        Provider.of<InstoreProvider>(context).instoreProvider.where((data) {
+              return data.isFavorite == true;
+            }).toList();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -44,7 +46,7 @@ class _ReferAFriendState extends State<ReferAFriend> {
                   child: CircleIcon(
                     icon: Icons.delete,
                     onTap: () {
-                      Provider.of<Favorite>(context, listen: false)
+                      Provider.of<InstoreProvider>(context, listen: false)
                           .deleteFavorite(_availableData[i]);
                     },
                   ),

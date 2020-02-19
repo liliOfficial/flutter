@@ -4,7 +4,7 @@ import 'package:flutter_app/cashrewards/data/instore_offers_data.dart';
 import 'package:flutter_app/cashrewards/models/merchant_card.dart';
 import 'package:flutter_app/cashrewards/pages/common/merchant_card.dart';
 import 'package:flutter_app/cashrewards/pages/common/merchant_list_item.dart';
-import 'package:flutter_app/cashrewards/providers/favorite.dart';
+import 'package:flutter_app/cashrewards/providers/instore.dart';
 import 'package:flutter_app/shared/circle_icon.dart';
 import 'package:provider/provider.dart';
 
@@ -18,20 +18,23 @@ class Instore extends StatefulWidget {
 }
 
 class _InstoreState extends State<Instore> {
-  List<MerchantCard> _availableData = INSTORE_MERCHANT;
+  List<MerchantCard> _availableData;
+  String filterKey = 'ALL';
 
   void _setFilters(String location) {
     setState(() {
-      _availableData = location == 'ALL'
-          ? INSTORE_MERCHANT
-          : INSTORE_MERCHANT.where((data) {
-              return data.location.contains(location);
-            }).toList();
+      filterKey = location;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    _availableData = filterKey == 'ALL'
+        ? Provider.of<InstoreProvider>(context).instoreProvider
+        : Provider.of<InstoreProvider>(context).instoreProvider.where((data) {
+            return data.location.contains(filterKey);
+          }).toList();
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -88,8 +91,8 @@ class _InstoreState extends State<Instore> {
                         ? Icons.star
                         : Icons.star_border,
                     onTap: () {
-                      Provider.of<Favorite>(context, listen: false)
-                          .addFavorite(_availableData[i]);
+                      Provider.of<InstoreProvider>(context, listen: false)
+                          .toggleFavorite(i);
                     },
                   ),
                 ),

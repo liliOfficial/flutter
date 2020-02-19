@@ -1,6 +1,6 @@
 import '../models/merchant_card.dart';
 
-const INSTORE_MERCHANT = const [
+final INSTORE_MERCHANT = [
   MerchantCard(
     id: 1003984,
     name: 'G-Star RAW',
