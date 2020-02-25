@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_app/cashrewards/data/instore_offers_data.dart';
 import 'package:flutter_app/cashrewards/models/merchant_card.dart';
 import 'package:flutter_app/cashrewards/pages/common/merchant_card.dart';
 import 'package:flutter_app/cashrewards/pages/common/merchant_list_item.dart';
@@ -9,6 +8,8 @@ import 'package:flutter_app/shared/circle_icon.dart';
 import 'package:provider/provider.dart';
 
 import 'instore_drawer.dart';
+
+enum WhyFarther { harder, smarter, selfStarter, tradingCharter }
 
 class Instore extends StatefulWidget {
   static const routeName = '/instore';
@@ -26,6 +27,16 @@ class _InstoreState extends State<Instore> {
       filterKey = location;
     });
   }
+
+  static const List<String> filterList = [
+    'ALL',
+    'NSW',
+    'VIC',
+    'SA',
+    'QLD',
+    'WA',
+    'NT'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +60,24 @@ class _InstoreState extends State<Instore> {
             unselectedLabelColor: Colors.black,
           ),
           title: Text('In-store 0ffers'),
+          actions: <Widget>[
+            PopupMenuButton(
+              onSelected: (result) {
+                setState(() {
+                  filterKey = result;
+                });
+              },
+              icon: Icon(Icons.sort),
+              itemBuilder: (_) => filterList
+                  .map(
+                    (item) => PopupMenuItem(
+                      value: item,
+                      child: Text(item),
+                    ),
+                  )
+                  .toList(),
+            )
+          ],
         ),
         drawer: InstoreDrawer(_setFilters),
         body: TabBarView(

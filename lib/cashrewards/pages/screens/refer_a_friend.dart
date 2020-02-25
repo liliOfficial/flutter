@@ -18,8 +18,9 @@ class _ReferAFriendState extends State<ReferAFriend> {
   Widget build(BuildContext context) {
     final List<MerchantCard> _availableData =
         Provider.of<InstoreProvider>(context).instoreProvider.where((data) {
-              return data.isFavorite == true;
-            }).toList();
+      return data.isFavorite == true;
+    }).toList();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
