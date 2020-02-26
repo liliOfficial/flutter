@@ -62,7 +62,8 @@ class SearchCard extends StatelessWidget {
                             onTap: () {
                               Navigator.of(context).pushNamed('/merchant',
                                   arguments: {
-                                    'name': merchantData['name'].toString()
+                                    'name': merchantData['name'].toString(),
+                                    'type':'instore',
                                   });
                             },
                             child: SearchCardCashback(

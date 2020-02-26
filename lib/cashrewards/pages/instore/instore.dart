@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/cashrewards/data/globle.dart';
 
 import 'package:flutter_app/cashrewards/models/merchant_card.dart';
 import 'package:flutter_app/cashrewards/pages/common/merchant_card.dart';
@@ -8,8 +9,6 @@ import 'package:flutter_app/shared/circle_icon.dart';
 import 'package:provider/provider.dart';
 
 import 'instore_drawer.dart';
-
-enum WhyFarther { harder, smarter, selfStarter, tradingCharter }
 
 class Instore extends StatefulWidget {
   static const routeName = '/instore';
@@ -28,15 +27,7 @@ class _InstoreState extends State<Instore> {
     });
   }
 
-  static const List<String> filterList = [
-    'ALL',
-    'NSW',
-    'VIC',
-    'SA',
-    'QLD',
-    'WA',
-    'NT'
-  ];
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +59,7 @@ class _InstoreState extends State<Instore> {
                 });
               },
               icon: Icon(Icons.sort),
-              itemBuilder: (_) => filterList
+              itemBuilder: (_) => STATES
                   .map(
                     (item) => PopupMenuItem(
                       value: item,

@@ -12,6 +12,7 @@ class MerchantPage extends StatelessWidget {
         ModalRoute.of(context).settings.arguments as Map<String, String>;
 
     return DefaultTabController(
+      initialIndex: routeArgs['type'] == 'instore' ? 1 : 0,
       length: 2,
       child: Scaffold(
         appBar: AppBar(

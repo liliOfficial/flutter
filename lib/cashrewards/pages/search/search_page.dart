@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/cashrewards/data/search.dart';
 import 'package:flutter_app/cashrewards/pages/common/go_back_button.dart';
+
+import 'package:flutter_app/cashrewards/providers/search.dart';
+import 'package:provider/provider.dart';
 
 import 'search_card.dart';
 import 'search_input.dart';
@@ -9,6 +11,7 @@ class SearchPage extends StatelessWidget {
   static const routeName = '/search';
   @override
   Widget build(BuildContext context) {
+    final searchResult = Provider.of<SearchProvider>(context).searchProvider;
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -24,7 +27,7 @@ class SearchPage extends StatelessWidget {
                     ),
                     child: Column(
                       children:
-                          SEARCHRESULT.map((data) => SearchCard(data)).toList(),
+                          searchResult.map((data) => SearchCard(data)).toList(),
                     ),
                   ),
                 ],

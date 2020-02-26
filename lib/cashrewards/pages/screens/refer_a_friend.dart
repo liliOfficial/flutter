@@ -24,7 +24,19 @@ class _ReferAFriendState extends State<ReferAFriend> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('My Favorite'),
+        title: Column(
+          children: <Widget>[
+            Text('My Favorite'),
+            Text(
+              'You have ' +
+                  _availableData.length.toString() +
+                  ' items in the list',
+              style: TextStyle(
+                fontSize: 12,
+              ),
+            ),
+          ],
+        ),
       ),
       body: Stack(
         children: <Widget>[

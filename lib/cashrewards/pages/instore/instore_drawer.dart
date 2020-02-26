@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-// enum SingingCharacter { nsw, vic, sa, qld, wa, nt }
+import 'package:flutter_app/cashrewards/data/globle.dart';
 
 class InstoreDrawer extends StatefulWidget {
   final Function setFilter;
@@ -11,15 +10,7 @@ class InstoreDrawer extends StatefulWidget {
 }
 
 class _InstoreDrawerState extends State<InstoreDrawer> {
-  static const List<String> radioList = [
-    'ALL',
-    'NSW',
-    'VIC',
-    'SA',
-    'QLD',
-    'WA',
-    'NT'
-  ];
+  static const List<String> radioList = STATES;
   String _character = '';
 
   @override
