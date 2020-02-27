@@ -30,6 +30,7 @@ class CardGrid extends StatelessWidget {
                       data.logoImageUrl,
                       data.commissionString,
                       data.cardLinkedSpecialTerms,
+                      'instore',
                     ))
                 .toList(),
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(

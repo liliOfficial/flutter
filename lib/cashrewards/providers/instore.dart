@@ -6,8 +6,8 @@ import '../models/merchant_card.dart';
 class InstoreProvider with ChangeNotifier {
   List<MerchantCard> instoreProvider = INSTORE_MERCHANT;
 
-  void toggleFavorite(int index) {
-    instoreProvider[index].isFavorite = !instoreProvider[index].isFavorite;
+  void toggleFavorite(MerchantCard item) {
+    instoreProvider.firstWhere((data) => data == item).isFavorite = !item.isFavorite;
     notifyListeners();
   }
 

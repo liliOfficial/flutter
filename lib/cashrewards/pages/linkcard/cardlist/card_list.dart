@@ -1,39 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/cashrewards/pages/common/go_back_button.dart';
 import 'package:flutter_app/cashrewards/pages/linkcard/cardlist/card_background.dart';
+import 'package:flutter_app/cashrewards/providers/linked_card.dart';
 import 'package:flutter_app/shared/circle_word_button.dart';
+import 'package:provider/provider.dart';
 
 import 'card_list_card.dart';
 
 class CardList extends StatelessWidget {
   static const routeName = '/cardlist';
 
-  static const cardList = [
-    {
-      "addedDate": "2018-10-11T05:25:45.000Z",
-      "cardId": "V254",
-      "cardLastFour": "9835",
-      "status": "Active",
-      "type": "VISA"
-    },
-    {
-      "addedDate": "2018-10-11T05:25:45.000Z",
-      "cardId": "V259",
-      "cardLastFour": "8888",
-      "status": "Active",
-      "type": "VISA"
-    },
-    {
-      "addedDate": "2018-10-11T05:25:45.000Z",
-      "cardId": "M259",
-      "cardLastFour": "1234",
-      "status": "Active",
-      "type": "MASTER"
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final cardList = Provider.of<LinkedCardProvider>(context).linkedCardProvider;
     return ClipRRect(
       child: Scaffold(
         body: Stack(

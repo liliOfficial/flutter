@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/shared/circle_icon_button.dart';
+import 'package:flutter_app/cashrewards/providers/linked_card.dart';
+import 'package:provider/provider.dart';
 
 class CardListCard extends StatelessWidget {
   final cardData;
@@ -59,7 +60,30 @@ class CardListCard extends StatelessWidget {
                     children: <Widget>[
                       Container(
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                title: Text('Are you sure?'),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    child: Text('No'),
+                                    onPressed: () {
+                                      Navigator.of(ctx).pop(false);
+                                    },
+                                  ),
+                                  FlatButton(
+                                    child: Text('Yes'),
+                                    onPressed: () {
+                                      Provider.of<LinkedCardProvider>(context, listen: false)
+                                          .deleteCard(cardData['cardId']);
+                                      Navigator.of(ctx).pop(false);
+                                    },
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[

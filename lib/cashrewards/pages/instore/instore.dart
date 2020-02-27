@@ -27,8 +27,6 @@ class _InstoreState extends State<Instore> {
     });
   }
 
- 
-
   @override
   Widget build(BuildContext context) {
     _availableData = filterKey == 'ALL'
@@ -101,6 +99,7 @@ class _InstoreState extends State<Instore> {
                   _availableData[i].logoImageUrl,
                   _availableData[i].commissionString,
                   _availableData[i].cardLinkedSpecialTerms,
+                  'instore',
                 ),
                 Positioned(
                   right: 10,
@@ -111,8 +110,23 @@ class _InstoreState extends State<Instore> {
                         ? Icons.star
                         : Icons.star_border,
                     onTap: () {
+                      Scaffold.of(context).showSnackBar(
+                        SnackBar(
+                            duration: Duration(milliseconds: 1000),
+                            content: Text(_availableData[i].isFavorite == true
+                                ? 'Remove from Favorite'
+                                : 'Add to Favorite'),
+                            action: SnackBarAction(
+                              label: 'UNDO',
+                              onPressed: () {
+                                Provider.of<InstoreProvider>(context,
+                                        listen: false)
+                                    .toggleFavorite(_availableData[i]);
+                              },
+                            )),
+                      );
                       Provider.of<InstoreProvider>(context, listen: false)
-                          .toggleFavorite(i);
+                          .toggleFavorite(_availableData[i]);
                     },
                   ),
                 ),

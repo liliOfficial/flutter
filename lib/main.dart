@@ -18,9 +18,9 @@ import 'cashrewards/pages/linkcard/cardlist/card_list.dart';
 import 'cashrewards/pages/merchant/merchant_page.dart';
 import 'cashrewards/pages/more/more_page.dart';
 import 'cashrewards/pages/screens/how_it_works.dart';
-import 'cashrewards/pages/screens/refer_a_friend.dart';
 import 'cashrewards/pages/search/search_page.dart';
 import 'cashrewards/pages/user/user_page.dart';
+import 'cashrewards/providers/linked_card.dart';
 import 'cashrewards/providers/search.dart';
 
 // import './execise/index.dart';
@@ -93,6 +93,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => InstoreProvider()),
         ChangeNotifierProvider(create: (_) => SearchProvider()),
+        ChangeNotifierProvider(create: (_) => LinkedCardProvider()),
+        
       ],
     );
   }

@@ -1,8 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/cashrewards/providers/linked_card.dart';
 import 'package:flutter_app/shared/color_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 // import 'package:flutter_card_io/flutter_card_io.dart';
 
 class CardAddForm extends StatefulWidget {
@@ -12,6 +14,8 @@ class CardAddForm extends StatefulWidget {
 
 class _CardAddFormState extends State<CardAddForm> {
   bool _checkboxValue = false;
+
+  final numberController = TextEditingController();
   // Map<String, dynamic> _data = {};
 
   // void _scanCard() async {
@@ -65,6 +69,7 @@ class _CardAddFormState extends State<CardAddForm> {
               data: Theme.of(context)
                   .copyWith(primaryColor: Theme.of(context).accentColor),
               child: TextField(
+                controller: numberController,
                 style: TextStyle(fontSize: 20),
                 maxLength: 16,
                 keyboardType: TextInputType.number,
@@ -188,7 +193,11 @@ class _CardAddFormState extends State<CardAddForm> {
         ),
         ColorButton(
           text: 'Link Card',
-          onPressed: () {},
+          onPressed: () {
+            Provider.of<LinkedCardProvider>(context, listen: false)
+                .addCard(numberController.text, routeArgs['type']);
+            Navigator.of(context).pushNamed('/cardlist');
+          },
         ),
       ],
     );

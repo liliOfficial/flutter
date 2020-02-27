@@ -24,6 +24,7 @@ class FavoriteGrid extends StatelessWidget {
             _availableData[i].logoImageUrl,
             _availableData[i].commissionString,
             _availableData[i].cardLinkedSpecialTerms,
+            'instore',
           ),
           Positioned(
             right: 10,
@@ -31,6 +32,18 @@ class FavoriteGrid extends StatelessWidget {
             child: CircleIcon(
               icon: Icons.delete,
               onTap: () {
+                Scaffold.of(context).showSnackBar(
+                  SnackBar(
+                      duration: Duration(milliseconds: 2000),
+                      content: Text('Remove from Favorite'),
+                      action: SnackBarAction(
+                        label: 'UNDO',
+                        onPressed: () {
+                          Provider.of<InstoreProvider>(context, listen: false)
+                              .toggleFavorite(_availableData[i]);
+                        },
+                      )),
+                );
                 Provider.of<InstoreProvider>(context, listen: false)
                     .deleteFavorite(_availableData[i]);
               },

@@ -25,8 +25,20 @@ class FavoriteList extends StatelessWidget {
           padding: EdgeInsets.only(right: 20),
           margin: EdgeInsets.only(bottom: 2),
         ),
-        direction: DismissDirection.endToStart,
+        direction: DismissDirection.endToStart,        
         onDismissed: (direction) {
+          Scaffold.of(context).showSnackBar(
+            SnackBar(
+                duration: Duration(milliseconds: 2000),
+                content: Text('Remove from Favorite'),
+                action: SnackBarAction(
+                  label: 'UNDO',
+                  onPressed: () {
+                    Provider.of<InstoreProvider>(context, listen: false)
+                        .toggleFavorite(_availableData[i]);
+                  },
+                )),
+          );
           Provider.of<InstoreProvider>(context, listen: false)
               .deleteFavorite(_availableData[i]);
         },

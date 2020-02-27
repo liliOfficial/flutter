@@ -32,6 +32,7 @@ class CardScroll extends StatelessWidget {
                       data.logoImageUrl,
                       data.commissionString,
                       data.cardLinkedSpecialTerms,
+                      '',
                     ),
                   ),
                 )

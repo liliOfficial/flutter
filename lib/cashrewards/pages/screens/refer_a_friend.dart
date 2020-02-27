@@ -52,6 +52,7 @@ class _ReferAFriendState extends State<ReferAFriend> {
                   _availableData[i].logoImageUrl,
                   _availableData[i].commissionString,
                   _availableData[i].cardLinkedSpecialTerms,
+                  'instore'
                 ),
                 Positioned(
                   right: 10,

@@ -7,6 +7,7 @@ class CardItem extends StatelessWidget {
   final String logoImageUrl;
   final String commissionString;
   final String description;
+  final String navigateType;
 
   CardItem(
     this.id,
@@ -15,10 +16,11 @@ class CardItem extends StatelessWidget {
     this.logoImageUrl,
     this.commissionString,
     this.description,
+    this.navigateType,
   );
 
   void selectStore(BuildContext context) {
-    Navigator.of(context).pushNamed('/merchant', arguments: {'name': name});
+    Navigator.of(context).pushNamed('/merchant', arguments: {'name': name, 'type': navigateType});
   }
 
   @override
