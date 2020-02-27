@@ -14,7 +14,7 @@ class FavoriteList extends StatelessWidget {
     return ListView.builder(
       itemCount: _availableData.length,
       itemBuilder: (ctx, i) => Dismissible(
-        key: ValueKey(_availableData[i].id),
+        key: UniqueKey(),
         background: Container(
           color: Theme.of(context).errorColor,
           child: Icon(

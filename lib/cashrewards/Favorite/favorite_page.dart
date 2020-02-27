@@ -31,7 +31,7 @@ class _FavoritePageState extends State<FavoritePage> {
               Tab(text: 'Grid'),
               Tab(text: 'List'),
             ],
-            labelColor: Colors.deepOrange,
+            labelColor: Theme.of(context).accentColor,
             unselectedLabelColor: Colors.black,
           ),
           title: Column(
