@@ -19,6 +19,7 @@ import 'cashrewards/pages/merchant/merchant_page.dart';
 import 'cashrewards/pages/more/more_page.dart';
 import 'cashrewards/pages/screens/how_it_works.dart';
 import 'cashrewards/pages/search/search_page.dart';
+import 'cashrewards/pages/user/setting/user_setting_page.dart';
 import 'cashrewards/pages/user/user_page.dart';
 import 'cashrewards/providers/linked_card.dart';
 import 'cashrewards/providers/search.dart';
@@ -79,6 +80,7 @@ class MyApp extends StatelessWidget {
           CardAdd.routeName: (ctx) => CardAdd(),
           CardAddInfo.routeName: (ctx) => CardAddInfo(),
           Login.routeName: (ctx) => Login(),
+          UserSetting.routeName:(ctx) => UserSetting()
         },
         // onGenerateRoute: (settings) {
         //   print(settings.arguments);

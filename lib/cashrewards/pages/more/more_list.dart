@@ -11,7 +11,7 @@ class MoreList extends StatelessWidget {
     {
       'icon': FontAwesomeIcons.cogs,
       'text': 'Settings',
-      'url': '/howitworks',
+      'url': '/usersetting',
     },
     {
       'icon': FontAwesomeIcons.history,
