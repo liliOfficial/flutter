@@ -5,6 +5,8 @@ import 'package:flutter_app/cashrewards/providers/linked_card.dart';
 import 'package:flutter_app/shared/color_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+
+import 'card_add_term.dart';
 // import 'package:flutter_card_io/flutter_card_io.dart';
 
 class CardAddForm extends StatefulWidget {
@@ -57,10 +59,6 @@ class _CardAddFormState extends State<CardAddForm> {
         ? 'assets/images/visa.png'
         : 'assets/images/mastercard.png';
 
-    final checkboxText = routeArgs['type'] == 'Visa'
-        ? 'By clicking ‘Opt-in’ I agree to the Terms and Privacy Policy, and that Cashrewards may share my Visa card number linked to my Cashrewards account with Visa so that Visa can review my transactions and tell Cashrewards about my qualifying purchases and provide rewards. View our '
-        : 'By clicking ‘Opt-in’ I agree to the Terms and Privacy Policy, and that Cashrewards may share my Mastercard card number linked to my Cashrewards account with Mastercard so that Mastercard can review my transactions and tell Cashrewards about my qualifying purchases and provide rewards. View our ';
-
     return Column(
       children: <Widget>[
         Stack(
@@ -69,6 +67,10 @@ class _CardAddFormState extends State<CardAddForm> {
               data: Theme.of(context)
                   .copyWith(primaryColor: Theme.of(context).accentColor),
               child: TextField(
+                onChanged: (text) {
+                  Provider.of<LinkedCardProvider>(context, listen: false)
+                      .cardValidation(text);
+                },
                 controller: numberController,
                 style: TextStyle(fontSize: 20),
                 maxLength: 16,
@@ -84,7 +86,10 @@ class _CardAddFormState extends State<CardAddForm> {
                     width: 60,
                   ),
                   labelText: routeArgs['type'] + ' Card number ',
-                  // errorText: 'Invalid card number',
+                  errorText: Provider.of<LinkedCardProvider>(context)
+                          .cardNoValidated
+                      ? null
+                      : Provider.of<LinkedCardProvider>(context).errorMessage,
                 ),
               ),
             ),
@@ -135,68 +140,43 @@ class _CardAddFormState extends State<CardAddForm> {
             onPressed: () {},
           ),
         ),
-        Container(
-          padding: EdgeInsets.symmetric(vertical: 25),
-          child: Row(
-            children: <Widget>[
-              Checkbox(
-                  value: _checkboxValue,
-                  onChanged: (bool value) {
-                    setState(() {
-                      _checkboxValue = value;
-                    });
-                  }),
-              Expanded(
-                child: RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: checkboxText,
-                        style: TextStyle(color: Colors.grey[600]),
-                      ),
-                      TextSpan(
-                        text: 'Terms',
-                        style: TextStyle(color: Colors.blue),
-                        recognizer: new TapGestureRecognizer()
-                          ..onTap = () => Navigator.of(context).pushNamed(
-                                '/webview',
-                                arguments: {
-                                  'title': 'Terms & Conditions',
-                                  'url':
-                                      'https://www.cashrewards.com.au/terms-and-conditions?showheader=false&showfooter=false',
-                                },
-                              ),
-                      ),
-                      TextSpan(
-                        text: ' & ',
-                        style: TextStyle(color: Colors.grey[600]),
-                      ),
-                      TextSpan(
-                        text: 'Privacy Policy',
-                        style: TextStyle(color: Colors.blue),
-                        recognizer: new TapGestureRecognizer()
-                          ..onTap = () => Navigator.of(context).pushNamed(
-                                '/webview',
-                                arguments: {
-                                  'title': 'Privacy Policy',
-                                  'url':
-                                      'https://www.cashrewards.com.au/privacy?showheader=false&showfooter=false',
-                                },
-                              ),
-                      )
-                    ],
-                  ),
+        Column(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 25),
+              child: Row(
+                children: <Widget>[
+                  Checkbox(
+                      value: _checkboxValue,
+                      onChanged: (bool value) {
+                        setState(() {
+                          _checkboxValue = value;
+                        });
+                      }),
+                  CardAddTerm(),
+                ],
+              ),
+            ),
+            if (!Provider.of<LinkedCardProvider>(context, listen: false).agreementValidated)
+            Container(
+              padding: EdgeInsets.only(left: 5, right: 5, bottom: 20),
+              child: Text(
+                'Please check the box to advise you have read and accepted the terms and conditions and privacy policy.',
+                style: TextStyle(
+                  color:Theme.of(context).errorColor
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         ColorButton(
           text: 'Link Card',
           onPressed: () {
-            Provider.of<LinkedCardProvider>(context, listen: false)
-                .addCard(numberController.text, routeArgs['type']);
-            Navigator.of(context).pushNamed('/cardlist');
+            Provider.of<LinkedCardProvider>(context, listen: false).addCard(
+                numberController.text,
+                _checkboxValue,
+                routeArgs['type'],
+                context);
           },
         ),
       ],

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/cashrewards/pages/common/go_back_button.dart';
+import 'package:flutter_app/cashrewards/providers/linked_card.dart';
+import 'package:flutter_app/shared/circle_word_button.dart';
+import 'package:provider/provider.dart';
 
 import 'card_add_form.dart';
 import 'card_background.dart';
@@ -36,10 +39,17 @@ class CardAddInfo extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-                      )
+                      CircleWordButton(
+                        width: 110,
+                        height: 110,
+                        icon: Icons.close,
+                        text: 'Cancel',
+                        onTap: () {
+                          Provider.of<LinkedCardProvider>(context,
+                                  listen: false)
+                              .initForm(context);
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -48,7 +58,8 @@ class CardAddInfo extends StatelessWidget {
           )
         ],
       ),
-      floatingActionButton: GoBackButton(backgroundColor: Theme.of(context).accentColor),
+      floatingActionButton:
+          GoBackButton(backgroundColor: Theme.of(context).accentColor),
     );
   }
 }

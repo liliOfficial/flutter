@@ -12,7 +12,8 @@ class CardList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cardList = Provider.of<LinkedCardProvider>(context).linkedCardProvider;
+    final cardList =
+        Provider.of<LinkedCardProvider>(context).linkedCardProvider;
     return ClipRRect(
       child: Scaffold(
         body: Stack(
@@ -53,7 +54,12 @@ class CardList extends StatelessWidget {
             )
           ],
         ),
-        floatingActionButton: GoBackButton(),
+        floatingActionButton: GoBackButton(
+          icon: Icons.home,
+          onPressed: () {
+            Navigator.of(context).pushNamed('/');
+          },
+        ),
       ),
     );
   }

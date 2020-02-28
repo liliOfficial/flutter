@@ -27,12 +27,12 @@ class MerchantOnline extends StatelessWidget {
               ),
               Container(
                 child: FlatButton(
-                  padding: const EdgeInsets.all(0.0),
+                  padding: EdgeInsets.all(0.0),
                   color: Colors.deepPurple,
                   child: Container(
                     width: 200,
-                    padding: const EdgeInsets.all(10.0),
-                    decoration: const BoxDecoration(
+                    padding: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: <Color>[
                           Colors.deepPurple,

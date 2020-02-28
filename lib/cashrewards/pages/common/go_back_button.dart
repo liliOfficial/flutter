@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 class GoBackButton extends StatelessWidget {
-  final backgroundColor;
-  GoBackButton({this.backgroundColor});
+  final Color backgroundColor;
+  final IconData icon;
+  final Function onPressed;
+  GoBackButton({this.backgroundColor, this.icon, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      backgroundColor: backgroundColor??Theme.of(context).primaryColor,
-      onPressed: () {
-        Navigator.pop(context);
-      },
-      child: Icon(Icons.arrow_back),
+      backgroundColor: backgroundColor ?? Theme.of(context).primaryColor,
+      onPressed: this.onPressed ?? () => Navigator.pop(context),
+      child: Icon(icon ?? Icons.arrow_back),
     );
   }
 }

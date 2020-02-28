@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/cashrewards/providers/linked_card.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class CardListCard extends StatelessWidget {
@@ -40,7 +41,8 @@ class CardListCard extends StatelessWidget {
                     style: TextStyle(color: textColor),
                   ),
                   Text(
-                    'Nov 28, 2019',
+                    DateFormat.yMMMMd()
+                        .format(DateTime.parse(cardData['addedDate'])),
                     style: TextStyle(
                       fontWeight: FontWeight.w300,
                       fontSize: 16,
@@ -67,16 +69,27 @@ class CardListCard extends StatelessWidget {
                                 title: Text('Are you sure?'),
                                 actions: <Widget>[
                                   FlatButton(
-                                    child: Text('No'),
+                                    child: Text(
+                                      'Yes',
+                                      style: TextStyle(
+                                        color: Theme.of(context).accentColor,
+                                      ),
+                                    ),
                                     onPressed: () {
+                                      Provider.of<LinkedCardProvider>(context,
+                                              listen: false)
+                                          .deleteCard(cardData['cardId']);
                                       Navigator.of(ctx).pop(false);
                                     },
                                   ),
                                   FlatButton(
-                                    child: Text('Yes'),
+                                    child: Text(
+                                      'No',
+                                      style: TextStyle(
+                                        color: Theme.of(context).accentColor,
+                                      ),
+                                    ),
                                     onPressed: () {
-                                      Provider.of<LinkedCardProvider>(context, listen: false)
-                                          .deleteCard(cardData['cardId']);
                                       Navigator.of(ctx).pop(false);
                                     },
                                   ),

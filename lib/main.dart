@@ -10,7 +10,7 @@ import 'package:flutter_app/cashrewards/pages/screens/help_center.dart';
 import 'package:flutter_app/cashrewards/pages/screens/web_view.dart';
 import 'package:flutter_app/cashrewards/pages/shop/shop.dart';
 
-import 'cashrewards/Favorite/favorite_page.dart';
+import 'cashrewards//pages/Favorite/favorite_page.dart';
 import 'cashrewards/pages/auth/login.dart';
 import 'cashrewards/pages/linkcard/cardlist/card_add.dart';
 import 'cashrewards/pages/linkcard/cardlist/card_add_info.dart';
