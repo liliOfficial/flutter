@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/shared/color_button.dart';
 import 'package:flutter_app/shared/line_button.dart';
 
-class LoginForm extends StatelessWidget {
+class LoginOrJoin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,7 +14,9 @@ class LoginForm extends StatelessWidget {
             children: <Widget>[
               ColorButton(
                 text: 'Join now',
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/join');
+                },
               ),
               Container(
                 padding: EdgeInsets.symmetric(vertical: 8),

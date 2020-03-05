@@ -1,35 +1,17 @@
 import 'package:flutter/material.dart';
 
-import 'login_form.dart';
+import 'auth_background.dart';
+import 'login_or_join.dart';
 
 class Login extends StatelessWidget {
   static const routeName = '/login';
-
-  final background = Transform.scale(
-    scale: 11,
-    child: Container(
-      width: double.infinity,
-      height: 120,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: LinearGradient(
-          begin: Alignment(1, 0),
-          end: Alignment.bottomRight,
-          colors: <Color>[
-            Color(0xFF3023AE),
-            Color(0xFF8700D7),
-          ],
-        ),
-      ),
-    ),
-  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          background,
+          AuthBackground(),
           SafeArea(
             child: ListView(
               children: [
@@ -72,7 +54,7 @@ class Login extends StatelessWidget {
                     ],
                   ),
                 ),
-                LoginForm(),
+                LoginOrJoin(),
               ],
             ),
           ),

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/cashrewards/pages/auth/join/join.dart';
 
 import 'package:flutter_app/cashrewards/providers/instore.dart';
 import 'package:provider/provider.dart';
@@ -80,7 +81,8 @@ class MyApp extends StatelessWidget {
           CardAdd.routeName: (ctx) => CardAdd(),
           CardAddInfo.routeName: (ctx) => CardAddInfo(),
           Login.routeName: (ctx) => Login(),
-          UserSetting.routeName:(ctx) => UserSetting()
+          UserSetting.routeName:(ctx) => UserSetting(),
+          JoinPage.routeName:(ctx) => JoinPage(),
         },
         // onGenerateRoute: (settings) {
         //   print(settings.arguments);

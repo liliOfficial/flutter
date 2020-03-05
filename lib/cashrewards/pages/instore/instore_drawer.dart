@@ -11,7 +11,7 @@ class InstoreDrawer extends StatefulWidget {
 
 class _InstoreDrawerState extends State<InstoreDrawer> {
   static const List<String> radioList = STATES;
-  String _character = '';
+  String _state = '';
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +25,11 @@ class _InstoreDrawerState extends State<InstoreDrawer> {
                   title: Text(data),
                   leading: Radio(
                     value: data,
-                    groupValue: _character,
+                    groupValue: _state,
                     onChanged: (String value) {
                       setState(() {
-                        _character = value;
-                        widget.setFilter(_character);
+                        _state = value;
+                        widget.setFilter(_state);
                       });
                     },
                   ),
