@@ -11,7 +11,7 @@ import 'package:flutter_app/cashrewards/pages/screens/help_center.dart';
 import 'package:flutter_app/cashrewards/pages/screens/web_view.dart';
 import 'package:flutter_app/cashrewards/pages/shop/shop.dart';
 
-import 'cashrewards//pages/Favorite/favorite_page.dart';
+import 'cashrewards/pages/Favorite/favorite_page.dart';
 import 'cashrewards/pages/auth/login.dart';
 import 'cashrewards/pages/linkcard/cardlist/card_add.dart';
 import 'cashrewards/pages/linkcard/cardlist/card_add_info.dart';
@@ -22,6 +22,7 @@ import 'cashrewards/pages/screens/how_it_works.dart';
 import 'cashrewards/pages/search/search_page.dart';
 import 'cashrewards/pages/user/setting/user_setting_page.dart';
 import 'cashrewards/pages/user/user_page.dart';
+import 'cashrewards/providers/auth.dart';
 import 'cashrewards/providers/linked_card.dart';
 import 'cashrewards/providers/search.dart';
 
@@ -98,7 +99,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => InstoreProvider()),
         ChangeNotifierProvider(create: (_) => SearchProvider()),
         ChangeNotifierProvider(create: (_) => LinkedCardProvider()),
-        
+        ChangeNotifierProvider(create: (_) => AuthProvider()),       
       ],
     );
   }

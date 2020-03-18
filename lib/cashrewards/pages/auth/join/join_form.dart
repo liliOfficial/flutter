@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/cashrewards/providers/auth.dart';
+import 'package:provider/provider.dart';
 
 import 'join_form_steps.dart';
 
@@ -8,30 +10,38 @@ class JoinForm extends StatefulWidget {
 }
 
 class _JoinFormState extends State<JoinForm> {
-  List<Step> steps = JoinFormSteps().steps;
-
-  int currentStep = 0;
-  bool complete = false;
-
-  next() {
-    if (JoinFormSteps.stepFormkeys[currentStep].currentState.validate()) {
-      currentStep + 1 != steps.length
-          ? goTo(currentStep + 1)
-          : setState(() => complete = true);
-    }
-  }
-
-  cancel() {
-    if (currentStep > 0) {
-      goTo(currentStep - 1);
-    }
-  }
-
-  goTo(int step) {
-    setState(() => currentStep = step);
-  }
-
   Widget build(BuildContext context) {
+    int currentStep = Provider.of<AuthProvider>(context).currentStep;
+
+    List<Step> steps = JoinFormSteps().steps;
+
+    bool complete = false;
+
+    
+
+    completeForm() {
+      // setState(() => complete = true);
+      for (var i = 0; i < 3; i++) {
+        JoinFormSteps.stepFormkeys[i].currentState.reset();
+      }
+
+      Navigator.of(context).pushNamed('/');
+    }
+
+    
+
+    next() {
+      Provider.of<AuthProvider>(context).stepFormkeys[currentStep].currentState.save();
+      if (JoinFormSteps.stepFormkeys[currentStep].currentState.validate()) {
+        if (currentStep == 1) {
+          print(JoinFormSteps.stepFormkeys[currentStep].currentWidget);
+        }
+        // currentStep + 1 != steps.length
+        //     ? goTo(currentStep + 1)
+        //     : completeForm();
+      }
+    }
+
     return Container(
       padding: EdgeInsets.symmetric(vertical: 20),
       child: Card(
@@ -41,7 +51,7 @@ class _JoinFormState extends State<JoinForm> {
             controlsBuilder: (BuildContext context,
                 {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
               return Container(
-                padding: EdgeInsetsDirectional.only(top:10),
+                padding: EdgeInsetsDirectional.only(top: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -65,9 +75,9 @@ class _JoinFormState extends State<JoinForm> {
             currentStep: currentStep,
             onStepContinue: next,
             onStepTapped: (step) {
-              if (step < currentStep) goTo(step);
+              Provider.of<AuthProvider>(context, listen: false).goTo(step);
             },
-            onStepCancel: cancel,
+            onStepCancel: Provider.of<AuthProvider>(context, listen: false).cancel,
           ),
         ),
       ),

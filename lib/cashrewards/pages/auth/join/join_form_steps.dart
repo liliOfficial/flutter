@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'join_form_detail.dart';
+import 'join_form_email.dart';
 import 'join_form_mobile.dart';
 
 class JoinFormSteps extends StatelessWidget {
@@ -29,12 +30,7 @@ class JoinFormSteps extends StatelessWidget {
         children: <Widget>[
           Form(
             key: stepFormkeys[0],
-            child: TextFormField(
-              autofocus: true,
-              decoration: InputDecoration(labelText: 'Email Address'),
-              keyboardType: TextInputType.emailAddress,
-              validator: validateEmail,
-            ),
+            child: JoinFormEmail(),
           ),
         ],
       ),
