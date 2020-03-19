@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/cashrewards/providers/auth.dart';
 import 'package:provider/provider.dart';
 
-import 'join_form_steps.dart';
+import 'join_form_detail.dart';
+import 'join_form_email.dart';
+import 'join_form_mobile.dart';
 
 class JoinForm extends StatefulWidget {
   @override
@@ -13,34 +15,39 @@ class _JoinFormState extends State<JoinForm> {
   Widget build(BuildContext context) {
     int currentStep = Provider.of<AuthProvider>(context).currentStep;
 
-    List<Step> steps = JoinFormSteps().steps;
+    final List<GlobalKey<FormState>> stepFormkeys = Provider.of<AuthProvider>(context).stepFormkeys;
+
+    final List<Step> steps = [
+      Step(
+        title: const Text('Email for login'),
+        isActive: true,
+        state: StepState.complete,
+        content: JoinFormEmail(),
+      ),
+      Step(
+        isActive: false,
+        state: StepState.editing,
+        title: const Text('Mobile number for security'),
+        content: JoinFormMobile(),
+      ),
+      Step(
+        isActive: false,
+        state: StepState.editing,
+        title: const Text('Personal details'),
+        content: JoinFormDetail(stepFormkeys[2]),
+      ),
+    ];
 
     bool complete = false;
 
-    
-
-    completeForm() {
+    completeForm(constext) {
       // setState(() => complete = true);
       for (var i = 0; i < 3; i++) {
-        JoinFormSteps.stepFormkeys[i].currentState.reset();
+        stepFormkeys[i].currentState.reset();
       }
-
       Navigator.of(context).pushNamed('/');
     }
 
-    
-
-    next() {
-      Provider.of<AuthProvider>(context).stepFormkeys[currentStep].currentState.save();
-      if (JoinFormSteps.stepFormkeys[currentStep].currentState.validate()) {
-        if (currentStep == 1) {
-          print(JoinFormSteps.stepFormkeys[currentStep].currentWidget);
-        }
-        // currentStep + 1 != steps.length
-        //     ? goTo(currentStep + 1)
-        //     : completeForm();
-      }
-    }
 
     return Container(
       padding: EdgeInsets.symmetric(vertical: 20),
@@ -73,7 +80,9 @@ class _JoinFormState extends State<JoinForm> {
             physics: ClampingScrollPhysics(),
             steps: steps,
             currentStep: currentStep,
-            onStepContinue: next,
+            onStepContinue: () {
+              Provider.of<AuthProvider>(context, listen: false).next();
+            },
             onStepTapped: (step) {
               Provider.of<AuthProvider>(context, listen: false).goTo(step);
             },

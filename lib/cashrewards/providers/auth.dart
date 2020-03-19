@@ -33,13 +33,26 @@ class AuthProvider with ChangeNotifier {
     GlobalKey<FormState>(),
     GlobalKey<FormState>(),
   ];
-  
+
   int currentStep = 0;
 
   List<UserInfo> userInfo;
 
   String email;
   String backendEmailError = '';
+
+  String validateEmail(String value) {
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value))
+      return 'Enter Valid Email';
+    else if (backendEmailError != '')
+      return backendEmailError;
+    else
+      return null;
+  }
+
   String mobile;
   String otpCode;
 
@@ -83,5 +96,17 @@ class AuthProvider with ChangeNotifier {
   void cancel() {
     if (currentStep > 0) currentStep--;
     notifyListeners();
+  }
+
+  void next() {
+    stepFormkeys[currentStep].currentState.save();
+    if (stepFormkeys[currentStep].currentState.validate()) {
+      if (currentStep == 1) {
+        print(stepFormkeys[currentStep].currentWidget);
+      }
+      // currentStep + 1 != steps.length
+      //     ? goTo(currentStep + 1)
+      //     : completeForm();
+    }
   }
 }
