@@ -3,7 +3,6 @@ import 'package:flutter_app/cashrewards/providers/auth.dart';
 import 'package:provider/provider.dart';
 
 class JoinFormEmail extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final String backendError =
@@ -15,8 +14,6 @@ class JoinFormEmail extends StatelessWidget {
       RegExp regex = new RegExp(pattern);
       if (!regex.hasMatch(value))
         return 'Enter Valid Email';
-      else if (backendError != '')
-        return backendError;
       else
         return null;
     }
@@ -25,12 +22,23 @@ class JoinFormEmail extends StatelessWidget {
       key: Provider.of<AuthProvider>(context).stepFormkeys[0],
       child: TextFormField(
         autofocus: true,
-        decoration: InputDecoration(labelText: 'Email Address'),
+        onChanged: (text) {
+          Provider.of<AuthProvider>(context, listen: false)
+              .resetBackendEmailError('');
+        },
+        decoration: InputDecoration(
+          labelText: 'Email Address',
+          errorText: backendError == '' ? null : backendError,
+        ),
         keyboardType: TextInputType.emailAddress,
-        validator: Provider.of<AuthProvider>(context).validateEmail,
+        validator: (value) {
+          if (backendError != '') {
+            return backendError;
+          }
+          return validateEmail(value);
+        },
         onSaved: (String value) {
           Provider.of<AuthProvider>(context, listen: false).emailCheck(value);
-          // if(!response['success']) backendError = response['errors'][0]['message'];
         },
       ),
     );

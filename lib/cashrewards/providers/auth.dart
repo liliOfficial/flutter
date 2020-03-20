@@ -28,79 +28,98 @@ class UserInfo {
 }
 
 class AuthProvider with ChangeNotifier {
+  static const apiUrl = 'http://localhost:7654/otp-api/';
+  static const requestHeader = {
+    "accept": "application/json",
+    "content-type": "application/json"
+  };
+
   List<GlobalKey<FormState>> stepFormkeys = [
     GlobalKey<FormState>(),
     GlobalKey<FormState>(),
     GlobalKey<FormState>(),
   ];
 
-  int currentStep = 0;
+  int currentStep = 1;
 
-  List<UserInfo> userInfo;
+  Map<String, dynamic> userInfo = {'offerSelected': 0};
 
-  String email;
+  //for step 1
   String backendEmailError = '';
 
-  String validateEmail(String value) {
-    Pattern pattern =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = new RegExp(pattern);
-    if (!regex.hasMatch(value))
-      return 'Enter Valid Email';
-    else if (backendEmailError != '')
-      return backendEmailError;
-    else
-      return null;
+  void resetBackendEmailError(input) {
+    backendEmailError = input;
+    notifyListeners();
   }
 
-  String mobile;
-  String otpCode;
-
   void emailCheck(String email) async {
-    var url = 'http://localhost:7654/otp-api/email/conflict-check';
-
-    print(email);
+    const url = apiUrl + 'email/conflict-check';
 
     var response = await http.post(url,
-        body: json.encode({
-          'email': email,
-        }),
-        headers: {
-          "accept": "application/json",
-          "content-type": "application/json"
-        });
+        body: json.encode({'email': email}), headers: requestHeader);
 
     var responseJson = json.decode(response.body);
-
-    print(responseJson);
+    // print(responseJson);
 
     if (!responseJson['success']) {
-      backendEmailError = responseJson['errors'][0]['message'];
+      resetBackendEmailError(responseJson['errors'][0]['message']);
     } else {
+      userInfo = {...userInfo, 'email': email};
+
       backendEmailError = '';
       currentStep = 1;
     }
 
     notifyListeners();
-
-    // print('Response status: ${response.statusCode}');
-    // print('Response body: ${response.body}');
   }
 
+  //step 2
+  bool showCodeInput = false;
+  String backendMobileError = '';
+
+  void resetBackendMobileError(input) {
+    backendMobileError = input;
+    notifyListeners();
+  }
+
+  Future<void> sendCode(mobile) async {
+    print(mobile);
+
+    const url = apiUrl + 'mobile/request-otp-code';
+
+    var response = await http.post(url,
+        body: json.encode({'mobile': '+61 ' + mobile}), headers: requestHeader);
+
+    var responseJson = json.decode(response.body);
+    print(responseJson);
+
+    if (!responseJson['success']) {
+      resetBackendMobileError(responseJson['errors'][0]['message']);
+    }
+
+    notifyListeners();
+  }
+
+  //steps control
   void goTo(int step) {
     print(step);
     if (step < currentStep) currentStep = step;
+    for (var i = currentStep; i < 3; i++) {
+      stepFormkeys[i].currentState.reset();
+    }
+
     notifyListeners();
   }
 
   void cancel() {
-    if (currentStep > 0) currentStep--;
-    notifyListeners();
+    if (currentStep > 0) goTo(currentStep--);
   }
 
   void next() {
-    stepFormkeys[currentStep].currentState.save();
     if (stepFormkeys[currentStep].currentState.validate()) {
+      if (currentStep == 0) {
+        stepFormkeys[currentStep].currentState.save();
+      }
       if (currentStep == 1) {
         print(stepFormkeys[currentStep].currentWidget);
       }

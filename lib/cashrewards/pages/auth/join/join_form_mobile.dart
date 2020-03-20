@@ -3,22 +3,13 @@ import 'package:flutter_app/cashrewards/providers/auth.dart';
 import 'package:provider/provider.dart';
 
 class JoinFormMobile extends StatefulWidget {
-
   @override
   _JoinFormMobileState createState() => _JoinFormMobileState();
 }
 
 class _JoinFormMobileState extends State<JoinFormMobile> {
-  bool showCode = false;
   final _mobileController = TextEditingController();
   final _codeController = TextEditingController();
-
-  void sendCode() {
-    if (_mobileController.text != '')
-      setState(() {
-        showCode = true;
-      });
-  }
 
   @override
   void dispose() {
@@ -29,31 +20,55 @@ class _JoinFormMobileState extends State<JoinFormMobile> {
 
   @override
   Widget build(BuildContext context) {
+    final _formKey = Provider.of<AuthProvider>(context).stepFormkeys[1];
+    bool showCode = Provider.of<AuthProvider>(context).showCodeInput;
+
+    final String backendMobileError =
+        Provider.of<AuthProvider>(context).backendMobileError;
+
+    String validateMobile(String value) {
+      Pattern pattern = r'(^[0-9]{6,14}$)';
+      RegExp regex = new RegExp(pattern);
+      if (!regex.hasMatch(value))
+        return "The mobile number you've entered is invalid.";
+      else
+        return null;
+    }
+
     return Form(
-      key: Provider.of<AuthProvider>(context).stepFormkeys[1],
+      key: _formKey,
       child: Column(
         children: <Widget>[
           Stack(children: [
             TextFormField(
               autofocus: true,
-              decoration: InputDecoration(labelText: 'Phone Number'),
+              onChanged: (text) {
+                Provider.of<AuthProvider>(context, listen: false)
+                    .resetBackendMobileError('');
+              },
+              decoration: InputDecoration(
+                labelText: 'Phone Number',
+                errorText: backendMobileError == '' ? null : backendMobileError,
+              ),
               keyboardType: TextInputType.number,
               controller: _mobileController,
               validator: (value) {
                 if (value.isEmpty) {
                   return 'Phone Number is required';
                 }
-                if (_codeController.text == '') {
-                  return 'Please send code to verifiy your number';
-                }
-                return null;
+                return validateMobile(value);
               },
             ),
             Positioned(
               right: 0,
               top: 10,
               child: FlatButton(
-                onPressed: sendCode,
+                onPressed: () {
+                  if (_formKey.currentState.validate()) {
+                    Provider.of<AuthProvider>(context, listen: false)
+                        .sendCode(_mobileController.text);
+                  }
+                },
                 child: Text(
                   'Send code',
                   style: TextStyle(color: Theme.of(context).accentColor),
@@ -75,6 +90,9 @@ class _JoinFormMobileState extends State<JoinFormMobile> {
                     keyboardType: TextInputType.number,
                     controller: _codeController,
                     validator: (value) {
+                      if (!showCode) {
+                        return null;
+                      }
                       if (value.isEmpty || value.length != 6) {
                         return 'Invalid digit code';
                       }
