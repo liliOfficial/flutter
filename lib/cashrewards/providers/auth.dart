@@ -73,18 +73,29 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  //step 2
+  //step 2 -----------------------------------
+  TextEditingController mobileController = TextEditingController();
+  TextEditingController codeController = TextEditingController();
+
   bool showCodeInput = false;
   String backendMobileError = '';
+  String backendCodeError = '';
 
   void resetBackendMobileError(input) {
     backendMobileError = input;
     notifyListeners();
   }
 
-  Future<void> sendCode(mobile) async {
-    print(mobile);
+  void resetBackendCodeError(input) {
+    print('=====');
+    backendCodeError = input;
+    notifyListeners();
+  }
 
+  Future<void> sendCode() async {
+    codeController.text = '';
+
+    String mobile = mobileController.text;
     const url = apiUrl + 'mobile/request-otp-code';
 
     var response = await http.post(url,
@@ -95,6 +106,35 @@ class AuthProvider with ChangeNotifier {
 
     if (!responseJson['success']) {
       resetBackendMobileError(responseJson['errors'][0]['message']);
+    } else {
+      userInfo = {...userInfo, 'mobile': '+61 ' + mobile};
+
+      showCodeInput = true;
+    }
+    notifyListeners();
+  }
+
+  void verifyCode() async {
+    const url = apiUrl + 'mobile/verify-otp-code';
+    var response = await http.post(url,
+        body: json.encode(
+            {'mobile': userInfo['mobile'], 'otpCode': codeController.text}),
+        headers: requestHeader);
+
+    var responseJson = json.decode(response.body);
+    print(responseJson);
+
+    if (!responseJson['success']) {
+      resetBackendCodeError(responseJson['errors'][0]['message']);
+    } else {
+      userInfo = {...userInfo, 'otpCode': codeController.text};
+
+      showCodeInput = false;
+      backendMobileError = '';
+      backendCodeError = '';
+      mobileController.text = '';
+      codeController.text = '';
+      currentStep = 2;
     }
 
     notifyListeners();
@@ -121,6 +161,7 @@ class AuthProvider with ChangeNotifier {
         stepFormkeys[currentStep].currentState.save();
       }
       if (currentStep == 1) {
+        verifyCode();
         print(stepFormkeys[currentStep].currentWidget);
       }
       // currentStep + 1 != steps.length

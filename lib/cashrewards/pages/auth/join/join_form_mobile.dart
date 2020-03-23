@@ -9,22 +9,22 @@ class JoinFormMobile extends StatefulWidget {
 
 class _JoinFormMobileState extends State<JoinFormMobile> {
   final _mobileController = TextEditingController();
-  final _codeController = TextEditingController();
 
   @override
   void dispose() {
     _mobileController.dispose();
-    _codeController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final _formKey = Provider.of<AuthProvider>(context).stepFormkeys[1];
-    bool showCode = Provider.of<AuthProvider>(context).showCodeInput;
+    final bool showCode = Provider.of<AuthProvider>(context).showCodeInput;
 
     final String backendMobileError =
         Provider.of<AuthProvider>(context).backendMobileError;
+    final String backendCodeError =
+        Provider.of<AuthProvider>(context).backendCodeError;
 
     String validateMobile(String value) {
       Pattern pattern = r'(^[0-9]{6,14}$)';
@@ -51,7 +51,7 @@ class _JoinFormMobileState extends State<JoinFormMobile> {
                 errorText: backendMobileError == '' ? null : backendMobileError,
               ),
               keyboardType: TextInputType.number,
-              controller: _mobileController,
+              controller: Provider.of<AuthProvider>(context).mobileController,
               validator: (value) {
                 if (value.isEmpty) {
                   return 'Phone Number is required';
@@ -66,7 +66,7 @@ class _JoinFormMobileState extends State<JoinFormMobile> {
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
                     Provider.of<AuthProvider>(context, listen: false)
-                        .sendCode(_mobileController.text);
+                        .sendCode();
                   }
                 },
                 child: Text(
@@ -86,9 +86,14 @@ class _JoinFormMobileState extends State<JoinFormMobile> {
                         color: Theme.of(context).primaryColor,
                       )),
                   TextFormField(
-                    decoration: InputDecoration(labelText: '6-digit code'),
+                    decoration: InputDecoration(
+                      labelText: '6-digit code',
+                      errorText:
+                          backendCodeError == '' ? null : backendCodeError,
+                    ),
                     keyboardType: TextInputType.number,
-                    controller: _codeController,
+                    controller:
+                        Provider.of<AuthProvider>(context).codeController,
                     validator: (value) {
                       if (!showCode) {
                         return null;
@@ -96,10 +101,7 @@ class _JoinFormMobileState extends State<JoinFormMobile> {
                       if (value.isEmpty || value.length != 6) {
                         return 'Invalid digit code';
                       }
-                      setState(() {
-                        _codeController.text = '';
-                        showCode = false;
-                      });
+
                       return null;
                     },
                   ),

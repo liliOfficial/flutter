@@ -15,7 +15,8 @@ class _JoinFormState extends State<JoinForm> {
   Widget build(BuildContext context) {
     int currentStep = Provider.of<AuthProvider>(context).currentStep;
 
-    final List<GlobalKey<FormState>> stepFormkeys = Provider.of<AuthProvider>(context).stepFormkeys;
+    final List<GlobalKey<FormState>> stepFormkeys =
+        Provider.of<AuthProvider>(context).stepFormkeys;
 
     final List<Step> steps = [
       Step(
@@ -48,7 +49,6 @@ class _JoinFormState extends State<JoinForm> {
       Navigator.of(context).pushNamed('/');
     }
 
-
     return Container(
       padding: EdgeInsets.symmetric(vertical: 20),
       child: Card(
@@ -67,12 +67,14 @@ class _JoinFormState extends State<JoinForm> {
                         onPressed: onStepCancel,
                         child: const Text('Back'),
                       ),
-                    FlatButton(
-                      color: Theme.of(context).primaryColor,
-                      textColor: Colors.white,
-                      onPressed: onStepContinue,
-                      child: const Text('Next'),
-                    ),
+                    if (currentStep != 1 ||
+                        Provider.of<AuthProvider>(context).showCodeInput)
+                      FlatButton(
+                        color: Theme.of(context).primaryColor,
+                        textColor: Colors.white,
+                        onPressed: onStepContinue,
+                        child: const Text('Next'),
+                      ),
                   ],
                 ),
               );
@@ -86,7 +88,8 @@ class _JoinFormState extends State<JoinForm> {
             onStepTapped: (step) {
               Provider.of<AuthProvider>(context, listen: false).goTo(step);
             },
-            onStepCancel: Provider.of<AuthProvider>(context, listen: false).cancel,
+            onStepCancel:
+                Provider.of<AuthProvider>(context, listen: false).cancel,
           ),
         ),
       ),
