@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/cashrewards/providers/auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class JoinFormDetail extends StatefulWidget {
   final formKey;
@@ -10,8 +12,7 @@ class JoinFormDetail extends StatefulWidget {
 }
 
 class _JoinFormDetailState extends State<JoinFormDetail> {
-  final _passwordController = TextEditingController();
-  final _passwordConfirmationController = TextEditingController();
+
   bool _obscureText = true;
 
   void _toggleObscureText() {
@@ -29,6 +30,7 @@ class _JoinFormDetailState extends State<JoinFormDetail> {
           TextFormField(
             autofocus: true,
             decoration: InputDecoration(labelText: 'First name'),
+            controller: Provider.of<AuthProvider>(context).formDetail.firstName,
             validator: (value) {
               if (value.isEmpty) {
                 return 'First name is required.';
@@ -38,6 +40,7 @@ class _JoinFormDetailState extends State<JoinFormDetail> {
           ),
           TextFormField(
             decoration: InputDecoration(labelText: 'Last name'),
+            controller: Provider.of<AuthProvider>(context).formDetail.lastName,
             validator: (value) {
               if (value.isEmpty) {
                 return 'Last name is required.';
@@ -56,31 +59,32 @@ class _JoinFormDetailState extends State<JoinFormDetail> {
                 onPressed: _toggleObscureText,
               ),
             ),
+            controller: Provider.of<AuthProvider>(context).formDetail.password,
             validator: (value) {
               if (value.length < 8) {
                 return 'Your password must be at lease 8 characters.';
               }
               return null;
             },
-            controller: _passwordController,
           ),
           TextFormField(
             obscureText: _obscureText,
             decoration: InputDecoration(labelText: 'Password confirmation'),
+            controller: Provider.of<AuthProvider>(context).formDetail.confirmPassword,
             validator: (value) {
-              if (_passwordController.value !=
-                  _passwordConfirmationController.value) {
+              if (Provider.of<AuthProvider>(context).formDetail.password.value !=
+                  Provider.of<AuthProvider>(context).formDetail.confirmPassword.value) {
                 return 'Your passwords didn\'t match. Please Try again';
               }
               return null;
             },
-            controller: _passwordConfirmationController,
           ),
           TextFormField(
             decoration: InputDecoration(
               labelText: 'Postcode',
             ),
             keyboardType: TextInputType.number,
+            controller: Provider.of<AuthProvider>(context).formDetail.postCode,
             validator: (value) {
               if (value.isEmpty || value.length != 4) {
                 return 'Postcode is required.';
@@ -90,6 +94,7 @@ class _JoinFormDetailState extends State<JoinFormDetail> {
           ),
           TextFormField(
             decoration: InputDecoration(labelText: 'Promo code (Optional)'),
+            controller: Provider.of<AuthProvider>(context).formDetail.promoCode,
           ),
         ],
       ),

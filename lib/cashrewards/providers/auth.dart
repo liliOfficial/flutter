@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class UserInfo {
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String currentPassword;
-  final String postCode;
-  final String mobile;
-  final String otpCode;
-  final String accessCode;
-  final int offerSelected;
+  String firstName;
+  String lastName;
+  String email;
+  String currentPassword;
+  String postCode;
+  String mobile;
+  String otpCode;
+  String accessCode;
+  int offerSelected;
 
-  const UserInfo({
+  UserInfo({
     this.firstName = '',
     this.lastName = '',
     this.email = '',
@@ -24,6 +24,24 @@ class UserInfo {
     this.otpCode = '',
     this.accessCode = '',
     this.offerSelected = 0,
+  });
+}
+
+class DetailForm {
+  TextEditingController firstName;
+  TextEditingController lastName;
+  TextEditingController password;
+  TextEditingController confirmPassword;
+  TextEditingController postCode;
+  TextEditingController promoCode;
+
+  DetailForm({
+    this.firstName,
+    this.lastName,
+    this.password,
+    this.confirmPassword,
+    this.postCode,
+    this.promoCode,
   });
 }
 
@@ -40,11 +58,19 @@ class AuthProvider with ChangeNotifier {
     GlobalKey<FormState>(),
   ];
 
-  int currentStep = 1;
+  int currentStep = 0;
+  bool isLoading = false;
 
-  Map<String, dynamic> userInfo = {'offerSelected': 0};
+  void idLoadingTrue() {
+    isLoading = true;
+    notifyListeners();
+  }
 
-  //for step 1
+  var userInfo = UserInfo(
+    offerSelected: 0,
+  );
+
+  //step 1 ================================
   String backendEmailError = '';
 
   void resetBackendEmailError(input) {
@@ -55,25 +81,32 @@ class AuthProvider with ChangeNotifier {
   void emailCheck(String email) async {
     const url = apiUrl + 'email/conflict-check';
 
-    var response = await http.post(url,
-        body: json.encode({'email': email}), headers: requestHeader);
+    idLoadingTrue();
 
-    var responseJson = json.decode(response.body);
-    // print(responseJson);
+    try {
+      final response = await http.post(url,
+          body: json.encode({'email': email}), headers: requestHeader);
 
-    if (!responseJson['success']) {
-      resetBackendEmailError(responseJson['errors'][0]['message']);
-    } else {
-      userInfo = {...userInfo, 'email': email};
+      final responseJson = json.decode(response.body);
+      // print(responseJson);
 
-      backendEmailError = '';
-      currentStep = 1;
+      if (!responseJson['success']) {
+        resetBackendEmailError(responseJson['errors'][0]['message']);
+      } else {
+        userInfo.email = email;
+
+        backendEmailError = '';
+        currentStep = 1;
+      }
+    } catch (err) {
+      print(err);
+    } finally {
+      isLoading = false;
+      notifyListeners();
     }
-
-    notifyListeners();
   }
 
-  //step 2 -----------------------------------
+  //step 2 ================================
   TextEditingController mobileController = TextEditingController();
   TextEditingController codeController = TextEditingController();
 
@@ -92,53 +125,78 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void initStep2() {
+    showCodeInput = false;
+    backendMobileError = '';
+    backendCodeError = '';
+    mobileController.text = '';
+    codeController.text = '';
+  }
+
   Future<void> sendCode() async {
     codeController.text = '';
 
     String mobile = mobileController.text;
     const url = apiUrl + 'mobile/request-otp-code';
 
-    var response = await http.post(url,
+    idLoadingTrue();
+
+    final response = await http.post(url,
         body: json.encode({'mobile': '+61 ' + mobile}), headers: requestHeader);
 
-    var responseJson = json.decode(response.body);
+    final responseJson = json.decode(response.body);
     print(responseJson);
 
     if (!responseJson['success']) {
       resetBackendMobileError(responseJson['errors'][0]['message']);
     } else {
-      userInfo = {...userInfo, 'mobile': '+61 ' + mobile};
+      userInfo.mobile = '+61 ' + mobile;
 
       showCodeInput = true;
     }
+
+    isLoading = false;
     notifyListeners();
   }
 
   void verifyCode() async {
     const url = apiUrl + 'mobile/verify-otp-code';
-    var response = await http.post(url,
+
+    idLoadingTrue();
+
+    final response = await http.post(url,
         body: json.encode(
-            {'mobile': userInfo['mobile'], 'otpCode': codeController.text}),
+            {'mobile': userInfo.mobile, 'otpCode': codeController.text}),
         headers: requestHeader);
 
-    var responseJson = json.decode(response.body);
+    final responseJson = json.decode(response.body);
     print(responseJson);
 
     if (!responseJson['success']) {
       resetBackendCodeError(responseJson['errors'][0]['message']);
     } else {
-      userInfo = {...userInfo, 'otpCode': codeController.text};
+      userInfo.otpCode = codeController.text;
 
-      showCodeInput = false;
-      backendMobileError = '';
-      backendCodeError = '';
-      mobileController.text = '';
-      codeController.text = '';
+      initStep2();
       currentStep = 2;
     }
 
+    isLoading = false;
     notifyListeners();
   }
+
+  //step 3 ================================
+
+  DetailForm formDetail = DetailForm(
+    firstName: TextEditingController(),
+    lastName: TextEditingController(),
+    password: TextEditingController(),
+    confirmPassword: TextEditingController(),
+    postCode: TextEditingController(),
+    promoCode: TextEditingController(),
+  );
+
+  Future<void> onSubmit() async {}
 
   //steps control
   void goTo(int step) {
@@ -164,6 +222,9 @@ class AuthProvider with ChangeNotifier {
         verifyCode();
         print(stepFormkeys[currentStep].currentWidget);
       }
+
+      if (currentStep == 2) {}
+
       // currentStep + 1 != steps.length
       //     ? goTo(currentStep + 1)
       //     : completeForm();

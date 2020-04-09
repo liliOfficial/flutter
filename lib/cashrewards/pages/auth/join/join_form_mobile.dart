@@ -8,11 +8,9 @@ class JoinFormMobile extends StatefulWidget {
 }
 
 class _JoinFormMobileState extends State<JoinFormMobile> {
-  final _mobileController = TextEditingController();
 
   @override
   void dispose() {
-    _mobileController.dispose();
     super.dispose();
   }
 

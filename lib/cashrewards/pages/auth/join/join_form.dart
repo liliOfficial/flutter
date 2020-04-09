@@ -51,48 +51,59 @@ class _JoinFormState extends State<JoinForm> {
 
     return Container(
       padding: EdgeInsets.symmetric(vertical: 20),
-      child: Card(
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 20),
-          child: Stepper(
-            controlsBuilder: (BuildContext context,
-                {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
-              return Container(
-                padding: EdgeInsetsDirectional.only(top: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    if (currentStep != 0)
-                      OutlineButton(
-                        onPressed: onStepCancel,
-                        child: const Text('Back'),
-                      ),
-                    if (currentStep != 1 ||
-                        Provider.of<AuthProvider>(context).showCodeInput)
-                      FlatButton(
-                        color: Theme.of(context).primaryColor,
-                        textColor: Colors.white,
-                        onPressed: onStepContinue,
-                        child: const Text('Next'),
-                      ),
-                  ],
-                ),
-              );
-            },
-            physics: ClampingScrollPhysics(),
-            steps: steps,
-            currentStep: currentStep,
-            onStepContinue: () {
-              Provider.of<AuthProvider>(context, listen: false).next();
-            },
-            onStepTapped: (step) {
-              Provider.of<AuthProvider>(context, listen: false).goTo(step);
-            },
-            onStepCancel:
-                Provider.of<AuthProvider>(context, listen: false).cancel,
+      child: Stack(children: [
+        Card(
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 20),
+            child: Stepper(
+              controlsBuilder: (BuildContext context,
+                  {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
+                return Container(
+                  padding: EdgeInsetsDirectional.only(top: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      if (currentStep != 0)
+                        OutlineButton(
+                          onPressed: onStepCancel,
+                          child: Text('Back'),
+                        ),
+                      if (currentStep != 1 ||
+                          Provider.of<AuthProvider>(context).showCodeInput)
+                        FlatButton(
+                          color: Theme.of(context).primaryColor,
+                          textColor: Colors.white,
+                          onPressed: onStepContinue,
+                          child: Text(currentStep == 2 ? 'Join now' : 'Next'),
+                        ),
+                    ],
+                  ),
+                );
+              },
+              physics: ClampingScrollPhysics(),
+              steps: steps,
+              currentStep: currentStep,
+              onStepContinue: () {
+                Provider.of<AuthProvider>(context, listen: false).next();
+              },
+              onStepTapped: (step) {
+                Provider.of<AuthProvider>(context, listen: false).goTo(step);
+              },
+              onStepCancel:
+                  Provider.of<AuthProvider>(context, listen: false).cancel,
+            ),
           ),
         ),
-      ),
+        if( Provider.of<AuthProvider>(context).isLoading)
+        Positioned.fill(
+          child: Container(
+            color:Color.fromRGBO(255, 255, 255, 0.5),
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+        )
+      ]),
     );
   }
 }
