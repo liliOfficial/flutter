@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/cashrewards/models/http_exception.dart';
 import 'package:http/http.dart' as http;
 
 class UserInfo {
@@ -78,7 +79,7 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void emailCheck(String email) async {
+  Future<void> emailCheck(String email) async {
     const url = apiUrl + 'email/conflict-check';
 
     idLoadingTrue();
@@ -100,6 +101,7 @@ class AuthProvider with ChangeNotifier {
       }
     } catch (err) {
       print(err);
+      throw HttpException('ERROR!!!');
     } finally {
       isLoading = false;
       notifyListeners();

@@ -37,8 +37,18 @@ class JoinFormEmail extends StatelessWidget {
           }
           return validateEmail(value);
         },
-        onSaved: (String value) {
-          Provider.of<AuthProvider>(context, listen: false).emailCheck(value);
+        onSaved: (String value) async {
+          try {
+            await Provider.of<AuthProvider>(context, listen: false).emailCheck(value);
+          } catch (error) {
+            Scaffold.of(context).showSnackBar(
+              SnackBar(
+                content: Text(error.message),
+              )
+              
+            );
+          }
+          
         },
       ),
     );
