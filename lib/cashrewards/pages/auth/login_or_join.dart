@@ -28,7 +28,9 @@ class LoginOrJoin extends StatelessWidget {
               ),
               LineButton(
                 text: 'Sign in',
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/signin');
+                },
               ),
             ],
           ),

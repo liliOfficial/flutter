@@ -39,16 +39,13 @@ class JoinFormEmail extends StatelessWidget {
         },
         onSaved: (String value) async {
           try {
-            await Provider.of<AuthProvider>(context, listen: false).emailCheck(value);
+            await Provider.of<AuthProvider>(context, listen: false)
+                .emailCheck(value);
           } catch (error) {
-            Scaffold.of(context).showSnackBar(
-              SnackBar(
-                content: Text(error.message),
-              )
-              
-            );
+            Scaffold.of(context).showSnackBar(SnackBar(
+              content: Text(error.message),
+            ));
           }
-          
         },
       ),
     );

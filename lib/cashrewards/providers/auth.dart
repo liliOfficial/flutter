@@ -232,4 +232,6 @@ class AuthProvider with ChangeNotifier {
       //     : completeForm();
     }
   }
+
+  
 }

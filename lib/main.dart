@@ -13,6 +13,7 @@ import 'package:flutter_app/cashrewards/pages/shop/shop.dart';
 
 import 'cashrewards/pages/Favorite/favorite_page.dart';
 import 'cashrewards/pages/auth/login.dart';
+import 'cashrewards/pages/auth/sign_in/sign_in.dart';
 import 'cashrewards/pages/linkcard/cardlist/card_add.dart';
 import 'cashrewards/pages/linkcard/cardlist/card_add_info.dart';
 import 'cashrewards/pages/linkcard/cardlist/card_list.dart';
@@ -25,6 +26,7 @@ import 'cashrewards/pages/user/user_page.dart';
 import 'cashrewards/providers/auth.dart';
 import 'cashrewards/providers/linked_card.dart';
 import 'cashrewards/providers/search.dart';
+import 'cashrewards/providers/sign_in.dart';
 
 // import './execise/index.dart';
 // import './one_page/index.dart';
@@ -84,6 +86,7 @@ class MyApp extends StatelessWidget {
           Login.routeName: (ctx) => Login(),
           UserSetting.routeName:(ctx) => UserSetting(),
           JoinPage.routeName:(ctx) => JoinPage(),
+          SignIn.routeName:(ctx) => SignIn(),
         },
         // onGenerateRoute: (settings) {
         //   print(settings.arguments);
@@ -99,7 +102,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => InstoreProvider()),
         ChangeNotifierProvider(create: (_) => SearchProvider()),
         ChangeNotifierProvider(create: (_) => LinkedCardProvider()),
-        ChangeNotifierProvider(create: (_) => AuthProvider()),       
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        // ChangeNotifierProvider(create: (_) => SignInProvider()),        
       ],
     );
   }

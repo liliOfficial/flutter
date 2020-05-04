@@ -4,7 +4,7 @@ class AuthBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform.scale(
-      scale: 11,
+      scale: 10.5,
       child: Container(
         width: double.infinity,
         height: 120,
