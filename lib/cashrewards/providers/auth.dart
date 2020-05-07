@@ -62,7 +62,7 @@ class AuthProvider with ChangeNotifier {
   int currentStep = 0;
   bool isLoading = false;
 
-  void idLoadingTrue() {
+  void isLoadingTrue() {
     isLoading = true;
     notifyListeners();
   }
@@ -82,7 +82,7 @@ class AuthProvider with ChangeNotifier {
   Future<void> emailCheck(String email) async {
     const url = apiUrl + 'email/conflict-check';
 
-    idLoadingTrue();
+    isLoadingTrue();
 
     try {
       final response = await http.post(url,
@@ -141,7 +141,7 @@ class AuthProvider with ChangeNotifier {
     String mobile = mobileController.text;
     const url = apiUrl + 'mobile/request-otp-code';
 
-    idLoadingTrue();
+    isLoadingTrue();
 
     final response = await http.post(url,
         body: json.encode({'mobile': '+61 ' + mobile}), headers: requestHeader);
@@ -164,7 +164,7 @@ class AuthProvider with ChangeNotifier {
   void verifyCode() async {
     const url = apiUrl + 'mobile/verify-otp-code';
 
-    idLoadingTrue();
+    isLoadingTrue();
 
     final response = await http.post(url,
         body: json.encode(
