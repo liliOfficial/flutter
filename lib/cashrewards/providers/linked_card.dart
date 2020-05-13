@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/cashrewards/data/cardList.dart';
 
 class LinkedCardProvider with ChangeNotifier {
+  String token;
+
   List linkedCardProvider = CARDLIST;
   bool cardNoValidated = true;
   bool agreementValidated = true;

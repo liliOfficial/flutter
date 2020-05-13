@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/cashrewards/providers/sign_in.dart';
+import 'package:provider/provider.dart';
 
 import 'more_list.dart';
 
@@ -54,7 +56,11 @@ class MorePage extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () {Navigator.of(context).pushNamed('/login');},
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed('/');
+                  Provider.of<SignInProvider>(context,listen: false).logout();
+                },
                 child: Text(
                   'Sign Out',
                   style: TextStyle(

@@ -47,14 +47,29 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => SignInProvider()),
         ChangeNotifierProvider(create: (_) => InstoreProvider()),
         ChangeNotifierProvider(create: (_) => SearchProvider()),
-        ChangeNotifierProvider(create: (_) => LinkedCardProvider()),
+        ChangeNotifierProxyProvider<SignInProvider, LinkedCardProvider>(
+          create: (_) => LinkedCardProvider(),
+          update: (BuildContext context, signIn, LinkedCardProvider previous) {
+            previous.token = signIn.token;
+            return previous;
+          },
+        ),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
       ],
       child: Consumer<SignInProvider>(
         builder: (ctx, signIn, _) => MaterialApp(
           title: 'Flutter Demo',
           theme: appTheme,
-          home: signIn.isAuth ? MyHomePage() : Login(),
+          home: signIn.isAuth
+              ? MyHomePage()
+              : FutureBuilder(
+                  future: signIn.tryAutoLogin(),
+                  builder: (ctx, authjResultSnapshot) =>
+                      authjResultSnapshot.connectionState ==
+                              ConnectionState.waiting
+                          ? Login()
+                          : Login(),
+                ),
           routes: {
             MerchantPage.routeName: (ctx) => MerchantPage(),
             '/shop': (ctx) => ShopPage(),

@@ -25,6 +25,7 @@ dependencies:
   font_awesome_flutter: ^8.5.0
   webview_flutter: ^0.3.19+5
   http: ^0.12.0+4
+  shared_preferences: ^0.5.7+2
   # flutter_card_io: 
   #   git:
   #     https://github.com/procedurallygenerated/flutter_card_io.git
