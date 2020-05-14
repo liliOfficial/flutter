@@ -35,6 +35,7 @@ class SignInProvider with ChangeNotifier {
   }
 
   Future<void> logout() async {
+    passwordController.clear();
     _token = null;
     _expiryDate = null;
     _userId = null;
@@ -55,7 +56,7 @@ class SignInProvider with ChangeNotifier {
     _authTimer = Timer(Duration(seconds: timeToExpiry), logout);
   }
 
-  Future<void> signIn() async {
+  Future<void> signIn(context) async {
     if (formKey.currentState.validate()) {
       const url =
           'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDejlOS_bICsz4fztfOW3_C_FJUO89ZnTE';
@@ -103,6 +104,7 @@ class SignInProvider with ChangeNotifier {
         );
 
         _autoLogout();
+         Navigator.pop(context);
         notifyListeners();
 
         final prefs = await SharedPreferences.getInstance();

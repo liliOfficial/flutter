@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/cashrewards/models/transaction.dart';
 
 class UserTransactionCard extends StatelessWidget {
-  final Transaction transaction ;
+  final Transaction transaction;
 
   UserTransactionCard(this.transaction);
 
@@ -50,7 +50,9 @@ class UserTransactionCard extends StatelessWidget {
                 ),
                 Container(
                   padding: EdgeInsets.only(top: 10),
-                  child: Text(transaction.estimated==''?'Cashback approved!':'Estimated approved: '+transaction.estimated),
+                  child: Text(transaction.estimated == ''
+                      ? 'Cashback approved!'
+                      : 'Estimated approved: ' + transaction.estimated),
                 )
               ],
             ),

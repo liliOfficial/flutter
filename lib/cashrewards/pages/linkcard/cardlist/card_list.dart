@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/cashrewards/pages/common/go_back_button.dart';
 import 'package:flutter_app/cashrewards/pages/linkcard/cardlist/card_background.dart';
 import 'package:flutter_app/cashrewards/providers/linked_card.dart';
+import 'package:flutter_app/helpers/custom_route.dart';
 import 'package:flutter_app/shared/circle_word_button.dart';
 import 'package:provider/provider.dart';
 
+import 'card_add.dart';
 import 'card_list_card.dart';
 
 class CardList extends StatelessWidget {
@@ -43,7 +45,10 @@ class CardList extends StatelessWidget {
                           icon: Icons.add,
                           text: 'Link a card',
                           onTap: () {
-                            Navigator.of(context).pushNamed('/cardadd');
+                            // Navigator.of(context).pushNamed('/cardadd');
+                            Navigator.of(context).pushReplacement(
+                              CustomRoute(builder: (ctx)=> CardAdd(),)
+                            );
                           },
                         ),
                       ],

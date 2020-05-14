@@ -79,8 +79,7 @@ class _SingInFormState extends State<SingInForm> {
                   onPressed: () async {
                     try {
                       await Provider.of<SignInProvider>(context, listen: false)
-                          .signIn();
-                      Navigator.pop(context);
+                          .signIn(context);
                     } on HttpException catch (error) {
                       Scaffold.of(context).showSnackBar(SnackBar(
                         content: Text(error.toString()),

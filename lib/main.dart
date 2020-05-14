@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app/cashrewards/pages/auth/join/join.dart';
 
@@ -11,7 +9,6 @@ import 'package:flutter_app/cashrewards/pages/screens/help_center.dart';
 import 'package:flutter_app/cashrewards/pages/screens/web_view.dart';
 import 'package:flutter_app/cashrewards/pages/shop/shop.dart';
 
-import 'cashrewards/pages/Favorite/favorite_page.dart';
 import 'cashrewards/pages/auth/login.dart';
 import 'cashrewards/pages/auth/sign_in/sign_in.dart';
 import 'cashrewards/pages/common/theme.dart';
@@ -20,7 +17,6 @@ import 'cashrewards/pages/linkcard/cardlist/card_add.dart';
 import 'cashrewards/pages/linkcard/cardlist/card_add_info.dart';
 import 'cashrewards/pages/linkcard/cardlist/card_list.dart';
 import 'cashrewards/pages/merchant/merchant_page.dart';
-import 'cashrewards/pages/more/more_page.dart';
 import 'cashrewards/pages/screens/how_it_works.dart';
 import 'cashrewards/pages/search/search_page.dart';
 import 'cashrewards/pages/user/setting/user_setting_page.dart';
